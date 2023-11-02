@@ -5,45 +5,66 @@
 @stop
 
 @section('content')
-<div class="row">
-    <div class="col-md-6">
-        <div class="card">
-            <img src="{{ asset($product->image) }}" alt="Product Image" class="card-img-top">
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="card p-4">
-            <div class="card-body">
-                <h3 class="card-title text-primary">{{ $product->name }}</h3>
-                <p class="card-text">{{ $product->description }}</p>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item bg-light">
-                        <strong>Price:</strong> Rp {{ number_format($product->price, 0) }}
-                    </li>
-                    <li class="list-group-item bg-light">
-                        <strong>Stock:</strong> {{ $product->stock }} pieces available
-                    </li>
-                </ul>
-                @if ($product->promo)
-                <div class="mt-3">
-                    <h5 class="card-title text-success">Promo Details</h5>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item bg-light">
-                            <strong>Promo Description:</strong> {{ $product->promo->description }}
-                        </li>
-                        <li class="list-group-item bg-light">
-                            <strong>Discount:</strong> {{ $product->promo->discount }}%
-                        </li>
-                        <li class="list-group-item bg-light">
-                            <strong>Valid Until:</strong> {{ $product->promo->end_date }}
-                        </li>
-                    </ul>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card product-card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <img src="{{ asset($product->image) }}" alt="Product Image" class="img-fluid rounded mb-3">
+                        </div>
+                        <div class="col-md-6">
+                            <h2 class="text-primary">{{ $product->name }}</h2>
+                            <p class="text-muted mb-4">{{ $product->description }}</p>
+
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    <i class="fas fa-tags text-primary"></i> <strong>Price:</strong> Rp {{
+                                    number_format($product->price, 0) }}
+                                </li>
+                                <li class="list-group-item">
+                                    <i class="fas fa-cubes text-success"></i> <strong>Stock:</strong> {{ $product->stock
+                                    - $product->orders->sum('quantity') }} pieces available
+                                </li>
+                                @if ($productPromo)
+                                <li class="list-group-item">
+                                    <i class="fas fa-gift text-warning"></i> <strong>Promo Description:</strong> {{
+                                    $productPromo->description }}
+                                </li>
+                                <li class="list-group-item">
+                                    <i class="fas fa-percent text-danger"></i> <strong>Discount:</strong> {{
+                                    $productPromo->discount }}%
+                                </li>
+                                <li class="list-group-item">
+                                    <i class="far fa-clock text-info"></i> <strong>Valid Until:</strong> {{
+                                    $productPromo->end_date }}
+                                </li>
+                                @endif
+                            </ul>
+
+                            @if (!$productPromo)
+                            <p class="text-muted mt-4"><i class="fas fa-exclamation-triangle text-warning"></i> No
+                                active promo at the moment.</p>
+                            @endif
+                        </div>
+                    </div>
                 </div>
-                @else
-                <p class="text-muted mt-3">No active promo at the moment.</p>
-                @endif
             </div>
         </div>
     </div>
 </div>
 @endsection
+
+@push('css')
+<style>
+    /* Animasi Hover untuk Tombol Order */
+    .order-button {
+        transition: transform 0.2s;
+    }
+
+    .order-button:hover {
+        transform: scale(1.05);
+    }
+</style>
+@endpush

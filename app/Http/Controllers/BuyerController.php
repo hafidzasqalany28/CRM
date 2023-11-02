@@ -20,12 +20,13 @@ class BuyerController extends Controller
     public function productDetail($id)
     {
         $product = Product::find($id);
+        $productPromo = Promo::where('product_id', $product->id)->first();
 
         if (!$product) {
             return redirect()->route('buyer.dashboard')->with('error', 'Product not found.');
         }
 
-        return view('buyer.product-detail', compact('product'));
+        return view('buyer.product-detail', compact('product', 'productPromo'));
     }
 
     public function profile()
