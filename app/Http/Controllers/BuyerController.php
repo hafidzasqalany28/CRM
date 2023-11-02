@@ -41,4 +41,39 @@ class BuyerController extends Controller
         $orders = Order::where('buyer_id', $user->id)->orderBy('created_at', 'desc')->get();
         return view('buyer.order-history', compact('orders'));
     }
+
+    public function order($product_id, Request $request)
+    {
+        // Validasi input quantity
+        $request->validate([
+            'quantity' => 'required|integer|min:1',
+        ]);
+
+        // Temukan produk berdasarkan $product_id
+        $product = Product::find($product_id);
+
+        if (!$product) {
+            return redirect()->route('buyer.dashboard')->with('error', 'Product not found.');
+        }
+
+        // Hitung total harga berdasarkan harga produk dan kuantitas
+        $quantity = $request->input('quantity');
+        $totalPrice = $product->price * $quantity;
+
+        // Simpan data pesanan ke dalam tabel orders dengan status "selesai"
+        $user = Auth::user();
+        $order = new Order();
+        $order->buyer_id = $user->id;
+        $order->product_id = $product->id;
+        $order->quantity = $quantity;
+        $order->total_price = $totalPrice;
+        $order->status = 'completed';
+        $order->save();
+
+        // Update stok produk
+        $product->stock -= $quantity;
+        $product->save();
+
+        return redirect()->route('buyer.dashboard')->with('success', 'Order successful.');
+    }
 }

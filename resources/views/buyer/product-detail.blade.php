@@ -47,6 +47,22 @@
                             <p class="text-muted mt-4"><i class="fas fa-exclamation-triangle text-warning"></i> No
                                 active promo at the moment.</p>
                             @endif
+
+                            <form method="post" action="{{ route('buyer.order', ['product_id' => $product->id]) }}">
+                                @csrf
+                                <div class="form-group">
+                                    <label for="quantity">Quantity:</label>
+                                    <input type="number" class="form-control" id="quantity" name="quantity" min="1"
+                                        value="1">
+                                </div>
+                                <div class="form-group">
+                                    <label for="total">Total Bayar:</label>
+                                    <input type="text" class="form-control" id="total" name="total"
+                                        value="Rp {{ number_format($product->price, 0) }}">
+                                </div>
+                                <button type="submit" class="btn btn-success order-button float-right">Order
+                                    Now</button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -54,11 +70,24 @@
         </div>
     </div>
 </div>
+<script>
+    // Fungsi untuk menghitung total bayar
+    function calculateTotal() {
+        var quantity = document.getElementById('quantity').value;
+        var price = {{ $product->price }};
+        var total = quantity * price;
+        document.getElementById('total').value = 'Rp ' + total.toLocaleString('id-ID');
+    }
+
+    // Panggil calculateTotal saat halaman dimuat dan setiap kali quantity berubah
+    window.addEventListener('DOMContentLoaded', calculateTotal);
+    document.getElementById('quantity').addEventListener('input', calculateTotal);
+</script>
+
 @endsection
 
 @push('css')
 <style>
-    /* Animasi Hover untuk Tombol Order */
     .order-button {
         transition: transform 0.2s;
     }

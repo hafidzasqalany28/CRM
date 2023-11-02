@@ -47,6 +47,7 @@ Route::group(['middleware' => ['auth', 'seller'], 'prefix' => 'seller', 'as' => 
 Route::group(['middleware' => ['auth', 'buyer'], 'prefix' => 'buyer', 'as' => 'buyer.'], function () {
     Route::get('/dashboard', [BuyerController::class, 'index'])->name('dashboard');
     Route::get('/product/detail/{id}', [BuyerController::class, 'productDetail'])->name('product.detail');
+    Route::post('/order/{product_id}', [BuyerController::class, 'order'])->name('order');
     Route::get('/profile', [BuyerController::class, 'profile'])->name('profile');
     Route::get('/order-history', [BuyerController::class, 'orderHistory'])->name('order-history');
 });
