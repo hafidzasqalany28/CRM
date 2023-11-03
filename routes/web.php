@@ -22,32 +22,37 @@ use App\Http\Controllers\SellerProductController;
 |
 */
 
+// Public routes
 Route::get('/', function () {
-    return view('auth.login');
+    return view('adminlte::auth.login');
 });
 
 Auth::routes();
 
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-// Admin routes
-Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'admin', 'as' => 'admin.'], function () {
-    Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
-    // Tambahkan rute lain untuk admin
+// Buyer routes
+Route::middleware(['auth', 'buyer'])->group(function () {
+    Route::prefix('buyer')->name('buyer.')->group(function () {
+        Route::get('/dashboard', [BuyerController::class, 'index'])->name('dashboard');
+        Route::get('/product/detail/{id}', [BuyerController::class, 'productDetail'])->name('product.detail');
+        Route::post('/order/{product_id}', [BuyerController::class, 'order'])->name('order');
+        Route::get('/profile', [BuyerController::class, 'profile'])->name('profile');
+        Route::get('/order-history', [BuyerController::class, 'orderHistory'])->name('order-history');
+    });
 });
 
 // Seller routes
-Route::group(['middleware' => ['auth', 'seller'], 'prefix' => 'seller', 'as' => 'seller.'], function () {
-    Route::get('/dashboard', [SellerController::class, 'index'])->name('dashboard');
-    Route::resource('/input-product', SellerProductController::class)->except('show');
-    Route::resource('/input-promo', SellerPromoController::class)->except('show');;
+Route::middleware(['auth', 'seller'])->group(function () {
+    Route::prefix('seller')->name('seller.')->group(function () {
+        Route::get('/dashboard', [SellerController::class, 'index'])->name('dashboard');
+        Route::resource('/input-product', SellerProductController::class)->except('show');
+        Route::resource('/input-promo', SellerPromoController::class)->except('show');
+    });
 });
 
-// Buyer routes
-Route::group(['middleware' => ['auth', 'buyer'], 'prefix' => 'buyer', 'as' => 'buyer.'], function () {
-    Route::get('/dashboard', [BuyerController::class, 'index'])->name('dashboard');
-    Route::get('/product/detail/{id}', [BuyerController::class, 'productDetail'])->name('product.detail');
-    Route::post('/order/{product_id}', [BuyerController::class, 'order'])->name('order');
-    Route::get('/profile', [BuyerController::class, 'profile'])->name('profile');
-    Route::get('/order-history', [BuyerController::class, 'orderHistory'])->name('order-history');
+// Admin routes
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::prefix('admin')->name('admin.')->group(function () {
+        Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
+        // Add other admin-specific routes here
+    });
 });

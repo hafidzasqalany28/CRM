@@ -306,9 +306,8 @@ return [
             'text' => 'Admin Dashboard',
             'url' => 'admin/dashboard',
             'icon' => 'fas fa-fw fa-tachometer-alt',
-            'can' => 'admin', // Hanya ditampilkan untuk pengguna dengan role 'admin'
+            'can' => 'admin',
         ],
-        // Tambahkan menu khusus admin sesuai kebutuhan
         [
             'text' => 'Admin Menu 1',
             'url' => 'admin/menu1',
@@ -327,7 +326,7 @@ return [
             'text' => 'Seller Dashboard',
             'url' => 'seller/dashboard',
             'icon' => 'fas fa-fw fa-shopping-bag',
-            'can' => 'seller', // Displayed only to users with the 'seller' role
+            'can' => 'seller',
         ],
         [
             'text' => 'Product Management',
@@ -352,12 +351,6 @@ return [
             'text' => 'Buyer Dashboard',
             'url' => 'buyer/dashboard',
             'icon' => 'fas fa-shopping-cart',
-            'can' => 'buyer',
-        ],
-        [
-            'text' => 'Product Detail',
-            'url' => 'buyer/product/detail/{id}',
-            'icon' => 'fas fa-info-circle',
             'can' => 'buyer',
         ],
         [

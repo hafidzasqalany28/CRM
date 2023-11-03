@@ -56,7 +56,7 @@
                                         value="1">
                                 </div>
                                 <div class="form-group">
-                                    <label for="total">Total Bayar:</label>
+                                    <label for="total">Total Payment:</label>
                                     <input type="text" class="form-control" id="total" name="total"
                                         value="Rp {{ number_format($product->price, 0) }}">
                                 </div>
@@ -71,7 +71,7 @@
     </div>
 </div>
 <script>
-    // Fungsi untuk menghitung total bayar
+    // Function to calculate the total payment
     function calculateTotal() {
         var quantity = document.getElementById('quantity').value;
         var price = {{ $product->price }};
@@ -79,7 +79,7 @@
         document.getElementById('total').value = 'Rp ' + total.toLocaleString('id-ID');
     }
 
-    // Panggil calculateTotal saat halaman dimuat dan setiap kali quantity berubah
+    // Call calculateTotal when the page loads and whenever the quantity changes
     window.addEventListener('DOMContentLoaded', calculateTotal);
     document.getElementById('quantity').addEventListener('input', calculateTotal);
 </script>
@@ -88,6 +88,14 @@
 
 @push('css')
 <style>
+    .product-card {
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .product-card .card-body {
+        padding: 2rem;
+    }
+
     .order-button {
         transition: transform 0.2s;
     }
