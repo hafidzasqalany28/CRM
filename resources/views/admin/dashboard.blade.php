@@ -63,42 +63,18 @@
     </div>
 
     <div class="row">
+        {{-- grafik --}}
         <div class="col-lg-6">
             <div class="card">
-                <div class="card-header border-0">
-                    <div class="d-flex justify-content-between">
-                        <h3 class="card-title">Online Store Visitors</h3>
-                        <a href="javascript:void(0);">Lihat Laporan</a>
-                    </div>
+                <div class="card-header">
+                    <h3 class="card-title">Grafik Penjualan Seller dan Jumlah Produk Aktif</h3>
                 </div>
                 <div class="card-body">
-                    <div class="d-flex">
-                        <p class="d-flex flex-column">
-                            <span class="text-bold text-lg">820</span>
-                            <span>Visitors Over Time</span>
-                        </p>
-                        <p class="ml-auto d-flex flex-column text-right">
-                            <span class="text-success">
-                                <i class="fas fa-arrow-up"></i> 12.5%
-                            </span>
-                            <span class="text-muted">Sejak minggu lalu</span>
-                        </p>
-                    </div>
-                    <div class "position-relative mb-4">
-                        <canvas id="visitors-chart" height="200"></canvas>
-                    </div>
-                    <div class="d-flex flex-row justify-content-end">
-                        <span class="mr-2">
-                            <i class="fas fa-square text-primary"></i> Minggu Ini
-                        </span>
-                        <span>
-                            <i class="fas fa-square text-gray"></i> Minggu Lalu
-                        </span>
-                    </div>
+                    <canvas id="combined-chart" height="200"></canvas>
                 </div>
             </div>
         </div>
-
+        <!-- Tabel Produk Terbaru -->
         <div class="col-lg-6">
             <div class="card">
                 <div class="card-header border-0">
@@ -107,7 +83,7 @@
                         <a href="#" class="btn btn-tool btn-sm">
                             <i class="fas fa-download"></i>
                         </a>
-                        <a href="#" class=" btn btn-tool btn-sm">
+                        <a href="#" class="btn btn-tool btn-sm">
                             <i class="fas fa-bars"></i>
                         </a>
                     </div>
@@ -119,14 +95,18 @@
                                 <th>Nama Produk</th>
                                 <th>Harga</th>
                                 <th>Stock Saat Ini</th>
+                                <th>Seller</th>
+                                <th>Created At</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($latestProducts as $product)
                             <tr>
                                 <td>{{ $product->name }}</td>
-                                <td>{{ $product->price }}</td>
+                                <td>Rp {{ number_format($product->price, 0, ',', '.') }}</td>
                                 <td>{{ $product->stock - $product->orders->sum('quantity') }}</td>
+                                <td>{{ $product->seller->name }}</td>
+                                <td>{{ $product->created_at }}</td>
                             </tr>
                             @endforeach
                         </tbody>
@@ -134,6 +114,90 @@
                 </div>
             </div>
         </div>
+
     </div>
 </div>
+@stop
+
+@section('js')
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    var sellerData = @json($products);
+        var sellerNames = Object.keys(sellerData);
+        var sellerTotalPrices = Object.values(sellerData).map(data => data.total_prices);
+        var sellerStocks = Object.values(sellerData).map(data => data.stocks);
+        var productCounts = Object.values(sellerData).map(data => data.product_names.length);
+
+        var ctx = document.getElementById('combined-chart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: sellerNames,
+                datasets: [
+                    {
+                        label: 'Total Harga Penjualan',
+                        data: sellerTotalPrices,
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1,
+                    },
+                    {
+                        label: 'Total Stok Produk',
+                        data: sellerStocks,
+                        backgroundColor: 'rgba(192, 75, 75, 0.2)',
+                        borderColor: 'rgba(192, 75, 75, 1)',
+                        borderWidth: 1,
+                    },
+                    {
+                        label: 'Jumlah Produk Aktif',
+                        data: productCounts,
+                        backgroundColor: 'rgba(75, 75, 192, 0.2)',
+                        borderColor: 'rgba(75, 75, 192, 1)',
+                        borderWidth: 1,
+                    },
+                ],
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: true,
+                    },
+                    title: {
+                        display: true,
+                        text: 'Grafik Penjualan Seller dan Jumlah Produk Aktif',
+                        fontSize: 16,
+                    },
+                },
+                tooltips: {
+                    callbacks: {
+                        label: function (context) {
+                            var label = context.dataset.label || '';
+                            if (label) {
+                                label += ': ';
+                            }
+                            label += context.parsed.y.toLocaleString('en-US', {
+                                style: 'currency',
+                                currency: 'USD',
+                            });
+
+                            if (context.datasetIndex === 0) {
+                                label += ' (' + sellerData[context.label].total_sold + ' terjual)';
+                            } else if (context.datasetIndex === 1) {
+                                label += ' (' + context.parsed.y + ' produk)';
+                            } else if (context.datasetIndex === 2) {
+                                label += ' (' + context.parsed.y + ' produk)';
+                            }
+
+                            return label;
+                        },
+                    },
+                },
+            }
+        });
+</script>
 @stop
