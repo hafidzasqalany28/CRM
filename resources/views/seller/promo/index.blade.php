@@ -17,14 +17,14 @@
             <table class="table table-bordered table-striped">
                 <thead>
                     <tr>
-                        <th>ID</th>
-                        <th>Nama</th>
-                        <th>Deskripsi</th>
-                        <th>Tanggal Mulai</th>
-                        <th>Tanggal Berakhir</th>
-                        <th>Discount (%)</th>
-                        <th>Produk Terkait</th>
-                        <th>Aksi</th>
+                        <th style="width: 5%">ID</th>
+                        <th style="width: 10%">Nama</th>
+                        <th style="width: 15%">Deskripsi</th>
+                        <th style="width: 10%">Tanggal Mulai</th>
+                        <th style="width: 10%">Tanggal Berakhir</th>
+                        <th style="width: 5%">Discount (%)</th>
+                        <th style="width: 15%">Produk Terkait</th>
+                        <th style="width: 10%">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>

@@ -300,24 +300,39 @@ return [
             'type' => 'fullscreen-widget',
             'topnav_right' => true,
         ],
-
-        // Admin Menu
+        // admin menu
         [
-            'text' => 'Admin Dashboard',
+            'text' => 'Dashboard',
             'url' => 'admin/dashboard',
             'icon' => 'fas fa-fw fa-tachometer-alt',
             'can' => 'admin',
         ],
         [
-            'text' => 'Admin Menu 1',
-            'url' => 'admin/menu1',
+            'text' => 'Manajemen Produk, Promo, dan Pengguna',
             'icon' => 'fas fa-fw fa-cogs',
             'can' => 'admin',
+            'submenu' => [
+                [
+                    'text' => 'Produk',
+                    'url' => 'admin/products',
+                    'icon' => 'fas fa-fw fa-shopping-cart',
+                ],
+                [
+                    'text' => 'Promo',
+                    'url' => 'admin/promos',
+                    'icon' => 'fas fa-fw fa-tags',
+                ],
+                [
+                    'text' => 'Pengguna',
+                    'url' => 'admin/users',
+                    'icon' => 'fas fa-fw fa-users',
+                ],
+            ],
         ],
         [
-            'text' => 'Admin Menu 2',
-            'url' => 'admin/menu2',
-            'icon' => 'fas fa-fw fa-wrench',
+            'text' => 'Notifikasi',
+            'url' => 'admin/notifications',
+            'icon' => 'fas fa-fw fa-bell',
             'can' => 'admin',
         ],
 
@@ -364,19 +379,6 @@ return [
             'url' => 'buyer/order-history',
             'icon' => 'fas fa-history',
             'can' => 'buyer',
-        ],
-
-        [
-            'text' => 'Profile',
-            'url' => 'profile',
-            'icon' => 'fas fa-fw fa-user',
-            'can' => 'admin', 'seller',
-        ],
-        [
-            'text' => 'Change Password',
-            'url' => 'password/change',
-            'icon' => 'fas fa-fw fa-lock',
-            'can' => 'admin', 'seller',
         ],
     ],
 

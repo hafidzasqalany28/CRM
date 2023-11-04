@@ -1,7 +1,7 @@
 @extends('adminlte::page')
 
 @section('content_header')
-<h1 class="m-0">Dashboard Penjual!</h1>
+<h1 class="m-0">Dashboard Penjual</h1>
 @stop
 
 @section('content')
@@ -9,21 +9,21 @@
     <div class="row">
         <div class="col-lg-6">
             <div class="card card-primary">
-                <div class="card-header border-0">
-                    <div class="d-flex justify-content-between">
-                        <h3 class="card-title">Statistik Penjualan dan Pendapatan</h3>
-                    </div>
+                <div class="card-header">
+                    <h3 class="card-title">Statistik Penjualan dan Pendapatan</h3>
                 </div>
                 <div class="card-body">
-                    <div class="d-flex">
-                        <p class="d-flex flex-column">
-                            <span class="text-bold text-lg">Total Produk Terjual: {{ $totalProductsSold }}</span>
-                            <span class="text-bold text-lg">Total Pendapatan: Rp {{ number_format($totalRevenue, 0, ',',
+                    <div class="d-flex justify-content-between align-items-center">
+                        <p class="mb-0">
+                            <span class="text-lg text-bold">Total Produk Terjual: {{ $totalProductsSold }}</span>
+                        </p>
+                        <p class="mb-0">
+                            <span class="text-lg text-bold">Total Pendapatan: Rp {{ number_format($totalRevenue, 0, ',',
                                 '.') }}</span>
                         </p>
                     </div>
-                    <div class="position-relative mb-4">
-                        <canvas id="productChart"></canvas>
+                    <div class="position-relative mt-4">
+                        <canvas id="productChart" style="height: 300px;"></canvas>
                     </div>
                 </div>
             </div>
@@ -95,7 +95,7 @@
         <div class="col-lg-6">
             <div class="card card-warning">
                 <div class="card-header">
-                    <h3 class="card-title">Laporan Penjualan dan Pendapatan</h3>
+                    <h3 class="card-title text-white">Laporan Penjualan dan Pendapatan</h3>
                 </div>
                 <div class="card-body">
                     <table class="table table-bordered">
