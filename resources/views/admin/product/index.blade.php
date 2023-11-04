@@ -37,6 +37,8 @@
                     <td>
                         <a href="{{ route('admin.products.show', $product->id) }}" class="btn btn-primary">Lihat</a>
                         <a href="{{ route('admin.products.edit', $product->id) }}" class="btn btn-warning">Edit</a>
+                        <a href="{{ route('admin.products.destroy', $product->id) }}" class="btn btn-danger"
+                            onclick="return confirm('Apakah Anda yakin ingin menghapus produk ini?')">Hapus</a>
                     </td>
                 </tr>
                 @endforeach

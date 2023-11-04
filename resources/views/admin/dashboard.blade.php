@@ -123,81 +123,86 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
     var sellerData = @json($products);
-        var sellerNames = Object.keys(sellerData);
-        var sellerTotalPrices = Object.values(sellerData).map(data => data.total_prices);
-        var sellerStocks = Object.values(sellerData).map(data => data.stocks);
-        var productCounts = Object.values(sellerData).map(data => data.product_names.length);
+    var sellerNames = Object.keys(sellerData);
+    var sellerTotalPrices = Object.values(sellerData).map(data => data.total_prices);
+    var sellerStocks = Object.values(sellerData).map(data => data.stocks);
+    var productCounts = Object.values(sellerData).map(data => data.product_names.length);
 
-        var ctx = document.getElementById('combined-chart').getContext('2d');
-        new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: sellerNames,
-                datasets: [
-                    {
-                        label: 'Total Harga Penjualan',
-                        data: sellerTotalPrices,
-                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                        borderColor: 'rgba(75, 192, 192, 1)',
-                        borderWidth: 1,
-                    },
-                    {
-                        label: 'Total Stok Produk',
-                        data: sellerStocks,
-                        backgroundColor: 'rgba(192, 75, 75, 0.2)',
-                        borderColor: 'rgba(192, 75, 75, 1)',
-                        borderWidth: 1,
-                    },
-                    {
-                        label: 'Jumlah Produk Aktif',
-                        data: productCounts,
-                        backgroundColor: 'rgba(75, 75, 192, 0.2)',
-                        borderColor: 'rgba(75, 75, 192, 1)',
-                        borderWidth: 1,
-                    },
-                ],
+    var ctx = document.getElementById('combined-chart').getContext('2d');
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: sellerNames,
+            datasets: [
+                {
+                    label: 'Total Harga Penjualan',
+                    data: sellerTotalPrices,
+                    backgroundColor: 'rgba(75, 192, 192, 0.7)', // Ubah warna latar belakang
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 2, // Ubah lebar garis
+                },
+                {
+                    label: 'Total Stok Produk',
+                    data: sellerStocks,
+                    backgroundColor: 'rgba(192, 75, 75, 0.7)', // Ubah warna latar belakang
+                    borderColor: 'rgba(192, 75, 75, 1)',
+                    borderWidth: 2, // Ubah lebar garis
+                },
+                {
+                    label: 'Jumlah Produk Aktif',
+                    data: productCounts,
+                    backgroundColor: 'rgba(75, 75, 192, 0.7)', // Ubah warna latar belakang
+                    borderColor: 'rgba(75, 75, 192, 1)',
+                    borderWidth: 2, // Ubah lebar garis
+                },
+            ],
+        },
+        options: {
+            // Tambahkan animasi
+            animation: {
+                duration: 2000, // Durasi animasi dalam milidetik
+                easing: 'easeInOutCubic', // Gaya animasi
             },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                    }
+            scales: {
+                y: {
+                    beginAtZero: true,
                 },
-                plugins: {
-                    legend: {
-                        display: true,
-                    },
-                    title: {
-                        display: true,
-                        text: 'Grafik Penjualan Seller dan Jumlah Produk Aktif',
-                        fontSize: 16,
-                    },
+            },
+            plugins: {
+                legend: {
+                    display: true,
                 },
-                tooltips: {
-                    callbacks: {
-                        label: function (context) {
-                            var label = context.dataset.label || '';
-                            if (label) {
-                                label += ': ';
-                            }
-                            label += context.parsed.y.toLocaleString('en-US', {
-                                style: 'currency',
-                                currency: 'USD',
-                            });
+                title: {
+                    display: true,
+                    text: 'Grafik Penjualan Seller dan Jumlah Produk Aktif',
+                    fontSize: 16,
+                },
+            },
+            tooltips: {
+                callbacks: {
+                    label: function (context) {
+                        var label = context.dataset.label || '';
+                        if (label) {
+                            label += ': ';
+                        }
+                        label += context.parsed.y.toLocaleString('en-US', {
+                            style: 'currency',
+                            currency: 'USD',
+                        });
 
-                            if (context.datasetIndex === 0) {
-                                label += ' (' + sellerData[context.label].total_sold + ' terjual)';
-                            } else if (context.datasetIndex === 1) {
-                                label += ' (' + context.parsed.y + ' produk)';
-                            } else if (context.datasetIndex === 2) {
-                                label += ' (' + context.parsed.y + ' produk)';
-                            }
+                        if (context.datasetIndex === 0) {
+                            label += ' (' + sellerData[context.label].total_sold + ' terjual)';
+                        } else if (context.datasetIndex === 1) {
+                            label += ' (' + context.parsed.y + ' produk)';
+                        } else if (context.datasetIndex === 2) {
+                            label += ' (' + context.parsed.y + ' produk)';
+                        }
 
-                            return label;
-                        },
+                        return label;
                     },
                 },
-            }
-        });
+            },
+        },
+    });
 </script>
 @stop

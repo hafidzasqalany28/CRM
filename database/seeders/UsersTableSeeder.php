@@ -2,9 +2,10 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
 use App\Models\User;
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class UsersTableSeeder extends Seeder
 {
@@ -61,6 +62,15 @@ class UsersTableSeeder extends Seeder
             ],
         ];
 
-        User::insert($users);
+        // Tambahkan timestamps
+        $timestamp = now();
+        $users = array_map(function ($user) use ($timestamp) {
+            $user['created_at'] = $timestamp;
+            $user['updated_at'] = $timestamp;
+            return $user;
+        }, $users);
+
+        // Insert data ke tabel Users
+        DB::table('users')->insert($users);
     }
 }
