@@ -91,7 +91,6 @@
             </div>
         </div>
 
-
         <div class="col-lg-6">
             <div class="card card-warning">
                 <div class="card-header">
@@ -123,6 +122,7 @@
         </div>
     </div>
 </div>
+@stop
 
 @section('js')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
@@ -157,30 +157,30 @@
                     {
                         label: 'Harga',
                         data: salesData.map(product => product.price),
-                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        backgroundColor: 'rgba(75, 192, 192, 0.6)',
                         borderColor: 'rgba(75, 192, 192, 1)',
-                        borderWidth: 1
+                        borderWidth: 2
                     },
                     {
                         label: 'Total Terjual',
                         data: salesData.map(product => product.totalSold),
-                        backgroundColor: 'rgba(192, 75, 75, 0.2)',
+                        backgroundColor: 'rgba(192, 75, 75, 0.6)',
                         borderColor: 'rgba(192, 75, 75, 1)',
-                        borderWidth: 1
+                        borderWidth: 2
                     },
                     {
                         label: 'Total Pendapatan',
                         data: salesData.map(product => product.totalRevenue),
-                        backgroundColor: 'rgba(75, 75, 192, 0.2)',
+                        backgroundColor: 'rgba(75, 75, 192, 0.6)',
                         borderColor: 'rgba(75, 75, 192, 1)',
-                        borderWidth: 1
+                        borderWidth: 2
                     },
                     {
                         label: 'Stok Tersedia',
                         data: salesData.map(product => product.stockAvailable),
-                        backgroundColor: 'rgba(192, 192, 75, 0.2)',
+                        backgroundColor: 'rgba(192, 192, 75, 0.6)',
                         borderColor: 'rgba(192, 192, 75, 1)',
-                        borderWidth: 1
+                        borderWidth: 2
                     }
                 ]
             },
@@ -199,12 +199,20 @@
                 plugins: {
                     legend: {
                         display: true,
-                        position: 'top'
+                        position: 'top',
+                        labels: {
+                            font: {
+                                size: 14
+                            }
+                        }
                     }
+                },
+                animation: {
+                    duration: 1000,
+                    easing: 'easeInOutQuart'
                 }
             }
         });
     });
 </script>
-@endsection
 @stop
