@@ -88,7 +88,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="card-body table-responsive p-0">
+                <div class="card-body table-responsive">
                     <table class="table table-striped table-valign-middle">
                         <thead>
                             <tr>
@@ -103,15 +103,16 @@
                             @foreach ($latestProducts as $product)
                             <tr>
                                 <td>{{ $product->name }}</td>
-                                <td>Rp {{ number_format($product->price, 0, ',', '.') }}</td>
+                                <td class="text-nowrap">Rp {{ number_format($product->price, 0, ',', '.') }}</td>
                                 <td>{{ $product->stock - $product->orders->sum('quantity') }}</td>
                                 <td>{{ $product->seller->name }}</td>
-                                <td>{{ $product->created_at }}</td>
+                                <td class=>{{ $product->created_at }}</td>
                             </tr>
                             @endforeach
                         </tbody>
                     </table>
                 </div>
+
             </div>
         </div>
     </div>
