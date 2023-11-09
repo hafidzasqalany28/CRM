@@ -20,7 +20,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($orders as $order)
+                    @forelse($orders as $order)
                     <tr>
                         <td>{{ $order->id }}</td>
                         <td>{{ $order->created_at->format('F d, Y H:i:s') }}</td>
@@ -28,16 +28,21 @@
                         <td>{{ $order->quantity }}</td>
                         <td>Rp {{ number_format($order->total_price, 0) }}</td>
                         <td>
-                            @if ($order->status === 'pending')
-                            <span class="badge badge-warning">{{ $order->status }}</span>
-                            @elseif ($order->status === 'completed')
-                            <span class="badge badge-success">{{ $order->status }}</span>
-                            @else
-                            <span class="badge badge-danger">{{ $order->status }}</span>
-                            @endif
+                            @php
+                            $badgeClass = [
+                            'pending' => 'warning',
+                            'completed' => 'success',
+                            'canceled' => 'danger',
+                            ][$order->status];
+                            @endphp
+                            <span class="badge badge-{{ $badgeClass }}">{{ ucfirst($order->status) }}</span>
                         </td>
                     </tr>
-                    @endforeach
+                    @empty
+                    <tr>
+                        <td colspan="6" class="text-center">No order history available.</td>
+                    </tr>
+                    @endforelse
                 </tbody>
             </table>
         </div>

@@ -44,7 +44,11 @@ class AdminController extends Controller
                 'total_prices' => $seller->products->sum(function ($product) {
                     return $product->orders->sum('total_price');
                 }),
-                'stocks' => $seller->products->sum('stock'),
+                'stocks' => $seller->products->sum(function ($product) {
+                    // Perbarui stok berdasarkan pesanan
+                    $totalOrders = $product->orders->sum('quantity');
+                    return $product->stock - $totalOrders;
+                }),
             ];
         }
 
