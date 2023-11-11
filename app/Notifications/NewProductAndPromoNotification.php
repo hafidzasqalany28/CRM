@@ -27,6 +27,10 @@ class NewProductAndPromoNotification extends Notification
         } elseif ($this->productOrPromo instanceof \App\Models\Promo) {
             $message->line('New promo has been created!')
                 ->line('Promo Name: ' . $this->productOrPromo->name)
+                ->line('Description: ' . $this->productOrPromo->description)
+                ->line('Start Date: ' . \Carbon\Carbon::parse($this->productOrPromo->start_date)->format('m/d/Y'))
+                ->line('End Date: ' . \Carbon\Carbon::parse($this->productOrPromo->end_date)->format('m/d/Y'))
+                ->line('Discount: ' . $this->productOrPromo->discount . '%')
                 ->action('View Promo', url('/buyer/product/detail/' . $this->productOrPromo->id));
         }
 
