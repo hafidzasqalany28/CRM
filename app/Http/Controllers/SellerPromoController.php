@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Promo;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use App\Notifications\NewProductAndPromoNotification;
 
 class SellerPromoController extends Controller
 {
@@ -44,6 +45,10 @@ class SellerPromoController extends Controller
 
         $promo->save();
 
+        $buyers = \App\Models\User::where('role', 'buyer')->get();
+        foreach ($buyers as $buyer) {
+            $buyer->notify(new NewProductAndPromoNotification($promo));
+        }
         return redirect()->route('seller.input-promo.index')->with('success', 'Promo created successfully.');
     }
 

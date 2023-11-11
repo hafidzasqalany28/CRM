@@ -14,14 +14,16 @@
     @endphp
     <div class="col-lg-3 col-md-4 col-sm-6 col-12 mb-4">
         <div class="card h-100">
-            <img src="{{ asset($product->image) }}" alt="Product Image" class="card-img-top" style="max-height: 150px">
+            <div style="height: 0; padding-bottom: 100%; overflow: hidden; position: relative;">
+                <img src="{{ asset($product->image) }}" alt="Product Image" class="card-img-top"
+                    style="position: absolute; width: 100%; height: 100%; object-fit: cover;">
+            </div>
             <div class="card-body d-flex flex-column">
                 <h5 class="card-title text-primary">{{ $product->name }}</h5>
                 <p class="card-text text-muted">{{ $product->description }}</p>
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">
                         <i class="fas fa-money-bill-wave" style="color: green;"></i>
-                        <!-- Mengganti ikon dan warna -->
                         <span class="text-success font-weight-bold">
                             @if ($productPromo)
                             <del class="text-danger">Rp {{ number_format($product->price, 0) }}</del>
