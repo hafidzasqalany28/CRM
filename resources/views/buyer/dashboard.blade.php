@@ -12,10 +12,10 @@
     $discountedPrice = $productPromo ? ($product->price - ($product->price * ($productPromo->discount / 100))) :
     $product->price;
     @endphp
-    <div class="col-lg-3 col-md-4 col-sm-6 col-12 mb-4">
+    <div class="col-lg-3 col-md-4 col-sm-6 col-12 mb-2">
         <div class="card h-100">
             <div style="height: 0; padding-bottom: 100%; overflow: hidden; position: relative;">
-                <img src="{{ asset($product->image) }}" alt="Product Image" class="card-img-top"
+                <img src="{{ asset($product->image) }}" alt="Product Image" class="card-img-top img-thumbnail img-fluid"
                     style="position: absolute; width: 100%; height: 100%; object-fit: cover;">
             </div>
             <div class="card-body d-flex flex-column">
