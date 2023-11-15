@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\BuyerMiddleware;
 use App\Http\Controllers\AdminController;
@@ -29,6 +30,8 @@ use App\Http\Controllers\SellerProductController;
 Route::get('/', function () {
     return view('adminlte::auth.login');
 });
+
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Auth::routes();
 

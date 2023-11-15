@@ -31,7 +31,7 @@ class NewProductAndPromoNotification extends Notification
                 ->line('Start Date: ' . \Carbon\Carbon::parse($this->productOrPromo->start_date)->format('m/d/Y'))
                 ->line('End Date: ' . \Carbon\Carbon::parse($this->productOrPromo->end_date)->format('m/d/Y'))
                 ->line('Discount: ' . $this->productOrPromo->discount . '%')
-                ->action('View Promo', url('/buyer/product/detail/' . $this->productOrPromo->id));
+                ->action('View Promo', url('/buyer/product/detail/' . $this->productOrPromo->product_id));
         }
 
         return $message;
