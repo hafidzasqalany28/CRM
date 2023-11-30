@@ -39,6 +39,7 @@ Auth::routes();
 Route::middleware(['auth', 'buyer'])->group(function () {
     Route::prefix('buyer')->name('buyer.')->group(function () {
         Route::get('/dashboard', [BuyerController::class, 'index'])->name('dashboard');
+        Route::get('/about', [BuyerController::class, 'index'])->name('about');
         Route::get('/product/detail/{id}', [BuyerController::class, 'productDetail'])->name('product.detail');
         Route::post('/order/{product_id}', [BuyerController::class, 'order'])->name('order');
         Route::get('/profile', [BuyerController::class, 'profile'])->name('profile');

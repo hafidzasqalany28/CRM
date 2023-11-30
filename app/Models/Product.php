@@ -15,6 +15,44 @@ class Product extends Model
         'name', 'description', 'price', 'stock', 'image', 'seller_id'
     ];
 
+    public function isOnSale()
+    {
+        return $this->promos()->where('start_date', '<=', now())
+            ->where('end_date', '>=', now())
+            ->exists();
+    }
+
+
+    // public function hasReviews()
+    // {
+    //     // Check if the product has any reviews (assuming you have a reviews table)
+    //     return $this->orders()->where('status', 'completed')->whereNotNull('review')->exists();
+    // }
+
+    public function averageRating()
+    {
+        // Calculate the average rating of the product based on reviews (assuming you have a reviews table)
+        return $this->orders()->where('status', 'completed')->avg('review');
+    }
+
+    public function originalPrice()
+    {
+        return $this->price;
+    }
+
+    public function currentPrice()
+    {
+        if ($this->isOnSale()) {
+            $promo = $this->promos()->whereDate('start_date', '<=', now())
+                ->whereDate('end_date', '>=', now())
+                ->first();
+
+            return $this->price - ($this->price * $promo->discount / 100);
+        }
+
+        return $this->price;
+    }
+
     public function seller()
     {
         return $this->belongsTo(User::class, 'seller_id');
@@ -24,6 +62,7 @@ class Product extends Model
     {
         return $this->hasMany(Order::class, 'product_id');
     }
+
     public function promos()
     {
         return $this->hasMany(Promo::class, 'product_id');

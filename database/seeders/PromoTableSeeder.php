@@ -24,30 +24,29 @@ class PromoTableSeeder extends Seeder
             $ubiJalarUngu2 = Product::where('name', 'Ubi Jalar Ungu Kualitas Bagus')->first();
 
             if ($ubiJalarUngu && $ubiJalarUngu2) {
-                $timestamp = now();
 
                 $promosUbiJalarUngu = [
                     [
                         'name' => 'Diskon Ubi Jalar Ungu',
                         'description' => 'Diskon spesial untuk Ubi Jalar Ungu!',
-                        'start_date' => $timestamp,
-                        'end_date' => $timestamp->addDays(7),
+                        'start_date' => now(),
+                        'end_date' => now()->addDays(rand(1, 10)),
                         'discount' => 10,
                         'seller_id' => $seller1->id,
                         'product_id' => $ubiJalarUngu->id,
-                        'created_at' => $timestamp,
-                        'updated_at' => $timestamp,
+                        'created_at' => now(),
+                        'updated_at' => now(),
                     ],
                     [
                         'name' => 'Promo Beli 2 Gratis 1',
                         'description' => 'Beli 2 Ubi Jalar Ungu, dapatkan 1 gratis!',
-                        'start_date' => $timestamp,
-                        'end_date' => $timestamp->addDays(14),
+                        'start_date' => now(),
+                        'end_date' => now()->addDays(rand(1, 10)),
                         'discount' => 100,
                         'seller_id' => $seller1->id,
                         'product_id' => $ubiJalarUngu2->id,
-                        'created_at' => $timestamp,
-                        'updated_at' => $timestamp,
+                        'created_at' => now(),
+                        'updated_at' => now(),
                     ],
                 ];
 
@@ -62,30 +61,28 @@ class PromoTableSeeder extends Seeder
             $ubiJalarMerah2 = Product::where('name', 'Ubi Jalar Merah Pilihan')->first();
 
             if ($ubiJalarMerah && $ubiJalarMerah2) {
-                $timestamp = now();
-
                 $promosUbiJalarMerah = [
                     [
                         'name' => 'Potongan Harga Ubi Jalar Merah',
                         'description' => 'Diskon spesial untuk Ubi Jalar Merah!',
-                        'start_date' => $timestamp,
-                        'end_date' => $timestamp->addDays(10),
+                        'start_date' => now(),
+                        'end_date' => now()->addDays(rand(1, 10)),
                         'discount' => 15,
                         'seller_id' => $seller2->id,
                         'product_id' => $ubiJalarMerah->id,
-                        'created_at' => $timestamp,
-                        'updated_at' => $timestamp,
+                        'created_at' => now(),
+                        'updated_at' => now(),
                     ],
                     [
                         'name' => 'Promo Beli 3 Gratis 1',
                         'description' => 'Beli 3 Ubi Jalar Merah, dapatkan 1 gratis!',
-                        'start_date' => $timestamp,
-                        'end_date' => $timestamp->addDays(21),
+                        'start_date' => now(),
+                        'end_date' => now()->addDays(rand(1, 10)),
                         'discount' => 100,
                         'seller_id' => $seller2->id,
                         'product_id' => $ubiJalarMerah2->id,
-                        'created_at' => $timestamp,
-                        'updated_at' => $timestamp,
+                        'created_at' => now(),
+                        'updated_at' => now(),
                     ],
                 ];
 

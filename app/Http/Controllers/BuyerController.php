@@ -14,7 +14,7 @@ class BuyerController extends Controller
     {
         $products = Product::where('stock', '>', 0)->get();
         $promos = Promo::whereIn('product_id', $products->pluck('id'))->get();
-        return view('buyer.dashboard', compact('products', 'promos'));
+        return view('buyer.dashboard1', compact('products', 'promos'));
     }
 
     public function productDetail($id)
@@ -22,24 +22,27 @@ class BuyerController extends Controller
         $product = Product::find($id);
         $productPromo = Promo::where('product_id', $product->id)->first();
 
-        if (!$product) {
-            return redirect()->route('buyer.dashboard')->with('error', 'Product not found.');
+        if (!$product || $product->stock <= 0) {
+            return redirect()->route('buyer.dashboard')->with('error', 'Product not found or out of stock.');
         }
 
-        return view('buyer.product-detail', compact('product', 'productPromo'));
+        $relatedProducts = Product::where('stock', '>', 0)->inRandomOrder()->limit(4)->get();
+
+        return view('buyer.product-detail1', compact('product', 'productPromo', 'relatedProducts'));
     }
+
 
     public function profile()
     {
         $user = Auth::user();
-        return view('buyer.profile', compact('user'));
+        return view('buyer.profile1', compact('user'));
     }
 
     public function orderHistory()
     {
         $user = Auth::user();
         $orders = Order::where('buyer_id', $user->id)->orderBy('created_at', 'desc')->get();
-        return view('buyer.order-history', compact('orders'));
+        return view('buyer.order-history1', compact('orders'));
     }
 
     public function order($product_id, Request $request)
