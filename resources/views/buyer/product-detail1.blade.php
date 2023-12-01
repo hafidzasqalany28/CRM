@@ -47,9 +47,8 @@
                         <input type="text" class="form-control me-3" id="totalPayment" name="totalPrice"
                             style="max-width: 10rem" readonly
                             value="Rp {{ number_format($product->currentPrice(), 0) }}">
-                        <button class="btn btn-outline-dark flex-shrink-0 me-3" type="submit">
-                            <i class="bi-cart-fill me-1"></i>
-                            Booking Now
+                        <button class="btn btn-outline-dark flex-shrink-0 mt-3 me-3" type="submit">
+                            <i class="bi-cart-fill me-1"></i> Booking Now
                         </button>
                     </div>
                 </form>
@@ -142,6 +141,5 @@
         return 'Rp ' + new Intl.NumberFormat('id-ID').format(value);
     }
 </script>
-
 
 @endsection

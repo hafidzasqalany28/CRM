@@ -79,4 +79,9 @@ class BuyerController extends Controller
 
         return redirect()->route('buyer.dashboard')->with('success', 'Order successful.');
     }
+
+    public function about()
+    {
+        return view('buyer.about');
+    }
 }

@@ -1,8 +1,9 @@
 @extends('layouts.master')
 
-@section('title', 'Shop Homepage')
-@section('header', 'Shop in Style')
-@section('header-description', 'With this shop homepage template')
+@section('title', 'Discover Our Sweet Potato Shop')
+@section('header', 'Shop')
+@section('header-description', 'Explore our sweet potato shop and discover the essence of sustainable farming and rich
+flavors.')
 
 @section('content')
 <section class="py-5">
@@ -21,11 +22,11 @@
                         <h5 class="card-title">{{ $product->name }}</h5>
                         <p class="card-text text-muted">{{ $product->description }}</p>
                         <p class="card-text">Stock: {{ $product->stock }} items</p>
-                        <div class="d-flex justify-content-between align-items-center">
+                        <div class="d-flex justify-content-start align-items-center">
                             @if($product->isOnSale())
                             <span class="text-muted text-decoration-line-through">Rp {{
                                 number_format($product->originalPrice(), 0, ',', '.') }}</span>
-                            <p class="fw-bold">Rp {{ number_format($product->currentPrice(), 0, ',', '.') }}</p>
+                            <p class="fw-bold ms-2">Rp {{ number_format($product->currentPrice(), 0, ',', '.') }}</p>
                             @else
                             <p class="fw-bold">Rp {{ number_format($product->originalPrice(), 0, ',', '.') }}</p>
                             @endif

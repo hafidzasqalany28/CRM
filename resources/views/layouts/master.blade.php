@@ -7,6 +7,8 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>@yield('title', 'Shop Homepage - Start Bootstrap Template')</title>
+    {{-- font awesome --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="{{ asset('assets/favicon.ico') }}" />
     <!-- Bootstrap icons-->
@@ -14,7 +16,7 @@
     <!-- Bootstrap CSS from CDN -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <!-- Core theme CSS (includes Bootstrap)-->
+    <!-- Your Custom CSS -->
     <link href="{{ asset('css/styles.css') }}" rel="stylesheet" />
 </head>
 
@@ -22,14 +24,18 @@
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container px-4 px-lg-5">
-            <a class="navbar-brand" href="{{ route('buyer.dashboard') }}">Your Logo</a>
+            <a class="navbar-brand" href="{{ route('buyer.dashboard') }}">
+                <img src="{{ asset('assets/logo.PNG') }}" alt="Your Logo" width="auto" height="100">
+                SweeTrade Hub
+            </a>
+
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
                         <a class="nav-link {{ Request::is('buyer/dashboard') ? 'active' : '' }}"
                             href="{{ route('buyer.dashboard') }}">Home</a>
@@ -44,11 +50,6 @@
                     </li>
                 </ul>
                 <div class="d-flex">
-                    {{-- <button class="btn btn-outline-dark me-2" type="submit">
-                        <i class="bi-cart-fill me-1"></i>
-                        Cart
-                        <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
-                    </button> --}}
                     @auth
                     <div class="dropdown">
                         <button class="btn btn-outline-dark dropdown-toggle" type="button" id="userDropdown"

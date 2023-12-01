@@ -22,16 +22,8 @@ class Product extends Model
             ->exists();
     }
 
-
-    // public function hasReviews()
-    // {
-    //     // Check if the product has any reviews (assuming you have a reviews table)
-    //     return $this->orders()->where('status', 'completed')->whereNotNull('review')->exists();
-    // }
-
     public function averageRating()
     {
-        // Calculate the average rating of the product based on reviews (assuming you have a reviews table)
         return $this->orders()->where('status', 'completed')->avg('review');
     }
 
