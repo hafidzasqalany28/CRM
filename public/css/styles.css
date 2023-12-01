@@ -222,6 +222,16 @@ body {
     color: #fff; /* Text color of the dropdown items on hover */
 }
 
+.dropdown-item.logout {
+    color: #343a40 !important;
+    background-color: #ffffff !important;
+}
+
+.dropdown-item.logout:hover {
+    color: #ffffff !important;
+    background-color: #343a40 !important;
+}
+
 /* Footer Styles */
 footer {
     background-color: #343a40;
