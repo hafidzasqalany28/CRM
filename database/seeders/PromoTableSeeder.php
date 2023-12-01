@@ -14,8 +14,8 @@ class PromoTableSeeder extends Seeder
     public function run()
     {
         // Mendapatkan seller1 dan seller2
-        $seller1 = User::where('email', 'seller1@example.com')->first();
-        $seller2 = User::where('email', 'seller2@example.com')->first();
+        $seller1 = User::where('email', 'seller1.crm@gmail.com')->first();
+        $seller2 = User::where('email', 'seller2.crm@gmail.com')->first();
 
         // Hanya melanjutkan jika penjual ditemukan
         if ($seller1) {
@@ -42,7 +42,7 @@ class PromoTableSeeder extends Seeder
                         'description' => 'Beli 2 Ubi Jalar Ungu, dapatkan 1 gratis!',
                         'start_date' => now(),
                         'end_date' => now()->addDays(rand(1, 10)),
-                        'discount' => 100,
+                        'discount' => 70,
                         'seller_id' => $seller1->id,
                         'product_id' => $ubiJalarUngu2->id,
                         'created_at' => now(),
@@ -78,7 +78,7 @@ class PromoTableSeeder extends Seeder
                         'description' => 'Beli 3 Ubi Jalar Merah, dapatkan 1 gratis!',
                         'start_date' => now(),
                         'end_date' => now()->addDays(rand(1, 10)),
-                        'discount' => 100,
+                        'discount' => 50,
                         'seller_id' => $seller2->id,
                         'product_id' => $ubiJalarMerah2->id,
                         'created_at' => now(),

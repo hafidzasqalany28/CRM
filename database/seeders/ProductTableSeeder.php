@@ -12,8 +12,8 @@ class ProductTableSeeder extends Seeder
 {
     public function run()
     {
-        $seller1 = User::where('email', 'seller1@example.com')->first();
-        $seller2 = User::where('email', 'seller2@example.com')->first();
+        $seller1 = User::where('email', 'seller1.crm@gmail.com')->first();
+        $seller2 = User::where('email', 'seller2.crm@gmail.com')->first();
 
         if ($seller1) {
             $timestamp = now();
