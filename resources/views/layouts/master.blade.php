@@ -37,7 +37,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link {{ Request::is('buyer/dashboard') ? 'active' : '' }}"
+                        <a class="nav-link {{ Request::is('buyer/home') ? 'active' : '' }}"
                             href="{{ route('buyer.dashboard') }}">Home</a>
                     </li>
                     <li class="nav-item">
