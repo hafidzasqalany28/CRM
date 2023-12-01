@@ -6,7 +6,7 @@
 
 @section('content')
 <section class="py-5">
-    <div class="container px-4 px-lg-5 my-5">
+    <div class="container">
         <h2 class="fw-bolder mb-4">Your Order History</h2>
         @if($orders->isEmpty())
         <p class="text-muted">You have no order history.</p>

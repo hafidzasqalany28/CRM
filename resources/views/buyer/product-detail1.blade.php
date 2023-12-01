@@ -39,17 +39,30 @@
 
                 <form action="{{ route('buyer.order', ['product_id' => $product->id]) }}" method="POST">
                     @csrf
-                    <div class="d-flex align-items-center flex-wrap mt-4">
-                        <label for="quantity" class="me-2">Quantity:</label>
-                        <input class="form-control me-3" id="quantity" name="quantity" type="number" value="1" min="1"
-                            style="max-width: 3rem" onchange="updateTotalPrice()">
-                        <label for="totalPrice" class="me-2">Total Payment:</label>
-                        <input type="text" class="form-control me-3" id="totalPayment" name="totalPrice"
-                            style="max-width: 10rem" readonly
-                            value="Rp {{ number_format($product->currentPrice(), 0) }}">
-                        <button class="btn btn-outline-dark flex-shrink-0 mt-3 me-3" type="submit">
-                            <i class="bi-cart-fill me-1"></i> Booking Now
-                        </button>
+                    <div class="row align-items-center mt-4">
+                        <div class="col-md-4 col-12 mb-3">
+                            <label for="quantity" class="form-label">Quantity:</label>
+                            <div class="input-group">
+                                <button class="btn btn-outline-dark" type="button"
+                                    onclick="decreaseQuantity()">-</button>
+                                <input class="form-control" id="quantity" name="quantity" type="number" value="1"
+                                    min="1" style="max-width: 3rem" onchange="updateTotalPrice()">
+                                <button class="btn btn-outline-dark" type="button"
+                                    onclick="increaseQuantity()">+</button>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-12 mb-3">
+                            <label for="totalPrice" class="form-label">Total Payment:</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="totalPayment" name="totalPrice"
+                                    style="max-width: 10rem" readonly
+                                    value="Rp {{ number_format($product->currentPrice(), 0) }}">
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-12 ">
+                            <button class="btn btn-outline-dark mt-3" type="submit"><i class="bi-cart-fill me-1"></i>
+                                Booking Now</button>
+                        </div>
                     </div>
                 </form>
 
@@ -111,6 +124,20 @@
 </section>
 
 <script>
+    function increaseQuantity() {
+        var quantityInput = document.getElementById('quantity');
+        quantityInput.value = parseInt(quantityInput.value) + 1;
+        updateTotalPrice();
+    }
+
+    function decreaseQuantity() {
+        var quantityInput = document.getElementById('quantity');
+        if (parseInt(quantityInput.value) > 1) {
+            quantityInput.value = parseInt(quantityInput.value) - 1;
+            updateTotalPrice();
+        }
+    }
+
     document.addEventListener('DOMContentLoaded', function () {
         var quantity = document.getElementById('quantity');
         quantity.addEventListener('input', updateTotalPrice);

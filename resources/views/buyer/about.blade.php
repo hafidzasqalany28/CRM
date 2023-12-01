@@ -9,36 +9,35 @@
 @section('content')
 <section class="py-5">
     <!-- About Start -->
-    <div class="container-xxl py-5">
-        <div class="container">
-            <div class="row g-5 align-items-center">
-                <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
-                    <div class="about-img position-relative overflow-hidden p-5 pe-0">
-                        <img class="img-fluid w-100" src="{{ asset('assets/about.jpg') }}" alt="About Image"
-                            style="width: 100%; height: auto;">
-                    </div>
-                </div>
-                <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
-                    <h1 class="mb-4 text-black">Best Organic Sweet Potatoes</h1>
-                    <p class="mb-4 text-black">Explore the rich and diverse world of sweet potatoes in KAMPUNG
-                        BERSEHATI, DISTRIK TANAH MIRING, MERAUKE. Immerse yourself in the fascinating journey of this
-                        nutritious and versatile tuber that has become a staple in the local community.</p>
-                    <div class="checklist mb-4">
-                        <p><i class="fa fa-check text-black me-3"></i>Discover the natural growth process and
-                            cultivation techniques</p>
-                        <p><i class="fa fa-check text-black me-3"></i>Experience the unique flavors and varieties of
-                            sweet potatoes</p>
-                        <p><i class="fa fa-check text-black me-3"></i>Learn about the biologically safe practices
-                            followed by local farmers</p>
-                        <p><i class="fa fa-check text-black me-3"></i>Explore the cultural significance of sweet
-                            potatoes in the community</p>
-                        <p><i class="fa fa-check text-black me-3"></i>Explore sweet potatoes' contribution to organic
-                            and sustainable agriculture</p>
-                    </div>
-                    <a class="btn btn-outline-dark rounded-pill" href="#">Read More</a>
+    <div class="container">
+        <div class="row g-5 align-items-center">
+            <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
+                <div class="about-img position-relative overflow-hidden p-5 pe-0">
+                    <img class="img-fluid w-100" src="{{ asset('assets/about.jpg') }}" alt="About Image"
+                        style="width: 100%; height: auto;">
                 </div>
             </div>
+            <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
+                <h1 class="mb-4 text-black">Best Organic Sweet Potatoes</h1>
+                <p class="mb-4 text-black">Explore the rich and diverse world of sweet potatoes in KAMPUNG
+                    BERSEHATI, DISTRIK TANAH MIRING, MERAUKE. Immerse yourself in the fascinating journey of this
+                    nutritious and versatile tuber that has become a staple in the local community.</p>
+                <div class="checklist mb-4">
+                    <p><i class="fa fa-check text-black me-3"></i>Discover the natural growth process and
+                        cultivation techniques</p>
+                    <p><i class="fa fa-check text-black me-3"></i>Experience the unique flavors and varieties of
+                        sweet potatoes</p>
+                    <p><i class="fa fa-check text-black me-3"></i>Learn about the biologically safe practices
+                        followed by local farmers</p>
+                    <p><i class="fa fa-check text-black me-3"></i>Explore the cultural significance of sweet
+                        potatoes in the community</p>
+                    <p><i class="fa fa-check text-black me-3"></i>Explore sweet potatoes' contribution to organic
+                        and sustainable agriculture</p>
+                </div>
+                <a class="btn btn-outline-dark rounded-pill" href="#">Read More</a>
+            </div>
         </div>
+    </div>
     </div>
     <!-- About End -->
 
