@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'AdminLTE 3',
+    'title' => 'SweeTrade Hub',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -63,8 +63,8 @@ return [
     |
     */
 
-    'logo' => '<b>Admin</b>LTE',
-    'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+    'logo' => '<b>SweeTrade</b>Hub',
+    'logo_img' => 'vendor/adminlte/dist/img/logo.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
@@ -86,7 +86,7 @@ return [
     'auth_logo' => [
         'enabled' => false,
         'img' => [
-            'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+            'path' => 'vendor/adminlte/dist/img/logo.png',
             'alt' => 'Auth Logo',
             'class' => '',
             'width' => 50,
@@ -109,7 +109,7 @@ return [
     'preloader' => [
         'enabled' => true,
         'img' => [
-            'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+            'path' => 'vendor/adminlte/dist/img/logo.png',
             'alt' => 'AdminLTE Preloader Image',
             'effect' => 'animation__shake',
             'width' => 60,
@@ -253,7 +253,7 @@ return [
     */
 
     'use_route_url' => false,
-    'dashboard_url' => 'home',
+    'dashboard_url' => '',
     'logout_url' => 'logout',
     'login_url' => 'login',
     'register_url' => 'register',
@@ -308,31 +308,21 @@ return [
             'can' => 'admin',
         ],
         [
-            'text' => 'Manajemen Produk, Promo, dan Pengguna',
-            'icon' => 'fas fa-fw fa-cogs',
+            'text' => 'Produk',
+            'url' => 'admin/products',
+            'icon' => 'fas fa-fw fa-shopping-cart',
             'can' => 'admin',
-            'submenu' => [
-                [
-                    'text' => 'Produk',
-                    'url' => 'admin/products',
-                    'icon' => 'fas fa-fw fa-shopping-cart',
-                ],
-                [
-                    'text' => 'Promo',
-                    'url' => 'admin/promos',
-                    'icon' => 'fas fa-fw fa-tags',
-                ],
-                [
-                    'text' => 'Pengguna',
-                    'url' => 'admin/users',
-                    'icon' => 'fas fa-fw fa-users',
-                ],
-            ],
         ],
         [
-            'text' => 'Notifikasi',
-            'url' => 'admin/notifications',
-            'icon' => 'fas fa-fw fa-bell',
+            'text' => 'Promo',
+            'url' => 'admin/promos',
+            'icon' => 'fas fa-fw fa-tags',
+            'can' => 'admin',
+        ],
+        [
+            'text' => 'Pengguna',
+            'url' => 'admin/users',
+            'icon' => 'fas fa-fw fa-users',
             'can' => 'admin',
         ],
 
@@ -355,12 +345,7 @@ return [
             'icon' => 'fas fa-fw fa-tags',
             'can' => 'seller',
         ],
-        [
-            'text' => 'Stock and Promo Availability Notifications',
-            'url' => 'seller/notifications',
-            'icon' => 'fas fa-fw fa-bell',
-            'can' => 'seller',
-        ],
+
         // Buyer Menu
         [
             'text' => 'Buyer Dashboard',

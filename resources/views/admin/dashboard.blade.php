@@ -10,6 +10,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-3 col-6">
+            <!-- Card 1 -->
             <div class="small-box bg-info">
                 <div class="inner">
                     <h3>{{ $activeProductCount }}</h3>
@@ -23,6 +24,7 @@
         </div>
 
         <div class="col-lg-3 col-6">
+            <!-- Card 2 -->
             <div class="small-box bg-success">
                 <div class="inner">
                     <h3>{{ $activePromoCount }}</h3>
@@ -36,6 +38,7 @@
         </div>
 
         <div class="col-lg-3 col-6">
+            <!-- Card 3 -->
             <div class="small-box bg-warning">
                 <div class="inner">
                     <h3>{{ $totalBuyers }}</h3>
@@ -49,6 +52,7 @@
         </div>
 
         <div class="col-lg-3 col-6">
+            <!-- Card 4 -->
             <div class="small-box bg-danger">
                 <div class="inner">
                     <h3>{{ $totalSellers }}</h3>
@@ -64,19 +68,21 @@
 
     <div class="row">
         {{-- grafik --}}
-        <div class="col-lg-6">
-            <div class="card">
+        <div class="col-lg-6 d-flex">
+            <!-- Card 5 -->
+            <div class="card flex-fill">
                 <div class="card-header">
                     <h3 class="card-title">Grafik Penjualan Seller dan Jumlah Produk Aktif</h3>
                 </div>
                 <div class="card-body">
-                    <canvas id="combined-chart" height="200"></canvas>
+                    <canvas id="combined-chart" height="250"></canvas>
                 </div>
             </div>
         </div>
         <!-- Tabel Produk Terbaru -->
-        <div class="col-lg-6">
-            <div class="card">
+        <div class="col-lg-6 d-flex">
+            <!-- Card 6 -->
+            <div class="card flex-fill">
                 <div class="card-header border-0">
                     <h3 class="card-title">Produk Terbaru</h3>
                     <div class="card-tools">
@@ -112,10 +118,10 @@
                         </tbody>
                     </table>
                 </div>
-
             </div>
         </div>
     </div>
+
 </div>
 @stop
 
@@ -135,7 +141,7 @@
                 labels: sellerNames,
                 datasets: [
                     {
-                        label: 'Total Harga Penjualan',
+                        label: 'Total Pendapatan (RP)',
                         data: sellerTotalPrices,
                         backgroundColor: 'rgba(75, 192, 192, 0.7)', // Ubah warna latar belakang
                         borderColor: 'rgba(75, 192, 192, 1)',
@@ -158,8 +164,9 @@
                 ],
             },
             options: {
-                // Tambahkan animasi
                 animation: {
+                    responsive: true, // Menjadikan grafik responsif
+            maintainAspectRatio: false, // Menyesuaikan rasio aspek
                     duration: 2000, // Durasi animasi dalam milidetik
                     easing: 'easeInOutCubic', // Gaya animasi
                 },

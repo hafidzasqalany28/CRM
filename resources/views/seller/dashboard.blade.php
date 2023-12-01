@@ -7,8 +7,8 @@
 @section('content')
 <div class="container-fluid">
     <div class="row">
-        <div class="col-lg-6">
-            <div class="card card-primary">
+        <div class="col-lg-6 d-flex">
+            <div class="card card-primary flex-fill">
                 <div class="card-header">
                     <h3 class="card-title">Statistik Penjualan dan Pendapatan</h3>
                 </div>
@@ -28,8 +28,8 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-6">
-            <div class="card card-info">
+        <div class="col-lg-6 d-flex">
+            <div class="card card-info flex-fill">
                 <div class="card-header">
                     <h3 class="card-title">Daftar Produk</h3>
                 </div>
@@ -66,8 +66,8 @@
     </div>
 
     <div class="row">
-        <div class="col-lg-6">
-            <div class="card card-success">
+        <div class="col-lg-6 d-flex">
+            <div class="card card-success flex-fill">
                 <div class="card-header">
                     <h3 class="card-title">Promo Aktif</h3>
                 </div>
@@ -91,8 +91,8 @@
             </div>
         </div>
 
-        <div class="col-lg-6">
-            <div class="card card-warning">
+        <div class="col-lg-6 d-flex">
+            <div class="card card-warning flex-fill">
                 <div class="card-header">
                     <h3 class="card-title text-white">Laporan Penjualan dan Pendapatan</h3>
                 </div>
@@ -185,6 +185,8 @@
                 ]
             },
             options: {
+                responsive: true,
+        maintainAspectRatio: false,
                 scales: {
                     y: {
                         beginAtZero: true,
