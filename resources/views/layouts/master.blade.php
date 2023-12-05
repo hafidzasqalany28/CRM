@@ -7,7 +7,7 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>@yield('title', 'Shop Homepage - Start Bootstrap Template')</title>
-    {{-- font awesome --}}
+    {{-- Font Awesome --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="{{ asset('assets/favicon.ico') }}" />
@@ -15,14 +15,17 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
     <!-- Bootstrap CSS from CDN -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+    <!-- Add this line to include Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
     <!-- Your Custom CSS -->
     <link href="{{ asset('css/styles.css') }}" rel="stylesheet" />
 </head>
 
 <body>
     <!-- Navigation-->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
         <div class="container px-4 px-lg-5">
             <a class="navbar-brand" href="{{ route('buyer.dashboard') }}">
                 <img src="{{ asset('assets/logo.PNG') }}" alt="Your Logo" width="auto" height="100">
@@ -75,7 +78,7 @@
     </nav>
 
     <!-- Header-->
-    <header class="bg-dark py-5">
+    <header class="bg-dark py-5 mt-5">
         <div class="container px-4 px-lg-5 my-5">
             <div class="text-center text-white">
                 <h1 class="display-4 fw-bolder">@yield('header', 'Shop in style')</h1>
@@ -91,13 +94,16 @@
     </div>
 
     <!-- Footer -->
-    <div class="container-fluid bg-dark footer mt-5 pt-5 wow fadeIn" data-wow-delay="0.1s"
+    <div class="container-fluid bg-dark text-light footer mt-5 pt-5 wow fadeIn" data-wow-delay="0.1s"
         style="visibility: visible; animation-delay: 0.1s; animation-name: fadeIn;">
         <div class="container py-5">
             <div class="row g-5">
                 <div class="col-lg-3 col-md-6">
-                    <h1 class="fw-bold text-primary mb-4 text-white">About<span class="text-secondary">Us</span></h1>
-                    <p class="text-white">We are SWEETrade, dedicated to providing quality services and products.</p>
+                    <h1 class="fw-bold text-light mb-4">Sweet<span class="text-secondary">Potato</span></h1>
+                    <p>Your one-stop destination for the finest organic sweet potatoes. We are passionate about
+                        providing
+                        high-quality, sustainably grown sweet potatoes from KAMPUNG BERSEHATI, DISTRIK TANAH MIRING,
+                        MERAUKE.</p>
                     <div class="d-flex pt-2">
                         <a class="btn btn-square btn-outline-light rounded-circle me-1" href="#"><i
                                 class="fab fa-twitter"></i></a>
@@ -110,28 +116,27 @@
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
-                    <h4 class="text-light mb-4 text-white">Contact</h4>
-                    <p class="text-white"><i class="fa fa-map-marker-alt me-3"></i>Kampung Sersejato, Distrik Tanah
-                        Miring, Merauke</p>
-                    <p class="text-white"><i class="fa fa-phone-alt me-3"></i>+012 345 67890</p>
-                    <p class="text-white"><i class="fa fa-envelope me-3"></i>info@SweeTradeHub.com</p>
+                    <h4 class="text-light mb-4">Address</h4>
+                    <p><i class="fa fa-map-marker-alt me-3"></i>123 Street, New York, USA</p>
+                    <p><i class="fa fa-phone-alt me-3"></i>+012 345 67890</p>
+                    <p><i class="fa fa-envelope me-3"></i>info@example.com</p>
                 </div>
                 <div class="col-lg-3 col-md-6">
-                    <h4 class="text-light mb-4 text-white">Quick Links</h4>
-                    <a class="btn btn-link text-white" href="#">About Us</a>
-                    <a class="btn btn-link text-white" href="#">Contact Us</a>
-                    <a class="btn btn-link text-white" href="#">Our Services</a>
-                    <a class="btn btn-link text-white" href="#">Terms &amp; Condition</a>
-                    <a class="btn btn-link text-white" href="#">Support</a>
+                    <h4 class="text-light mb-4">Quick Links</h4>
+                    <a class="btn btn-link text-light" href="#">About Us</a>
+                    <a class="btn btn-link text-light" href="#">Contact Us</a>
+                    <a class="btn btn-link text-light" href="#">Our Services</a>
+                    <a class="btn btn-link text-light" href="#">Terms &amp; Condition</a>
+                    <a class="btn btn-link text-light" href="#">Support</a>
                 </div>
                 <div class="col-lg-3 col-md-6">
-                    <h4 class="text-light mb-4 text-white">Newsletter</h4>
-                    <p class="text-white">Subscribe to our newsletter for the latest updates and offers.</p>
-                    <div class="position-relative mx-auto mt-3" style="max-width: 400px;">
-                        <input class="form-control bg-transparent w-100 py-3 ps-4 pe-5 text-white" type="text"
+                    <h4 class="text-light mb-4">Newsletter</h4>
+                    <p>Stay updated with our latest sweet potato news and offers. Sign up for our newsletter!</p>
+                    <div class="position-relative mx-auto" style="max-width: 400px;">
+                        <input class="form-control bg-transparent w-100 py-3 ps-4 pe-5" type="text"
                             placeholder="Your email">
-                        <button type="button"
-                            class="btn btn-light py-2 position-absolute top-0 end-0 mt-2 me-2">Subscribe</button>
+                        <button type="button" class="btn btn-success py-2 position-absolute top-0 end-0 mt-2 me-2">Sign
+                            Up</button>
                     </div>
                 </div>
             </div>
@@ -139,13 +144,16 @@
         <div class="container-fluid copyright">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0 text-white">
-                        © <a href="#" class="text-white">SWEETrade</a>, All Right Reserved.
+                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                        © <a href="#" class="text-light">Sweet Potato Shop</a>, All Right Reserved.
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+
+
 
 
     <!-- Bootstrap core JS-->
