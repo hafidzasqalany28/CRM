@@ -1,11 +1,11 @@
 @extends('layouts.master')
 
-@section('title', 'Product Detail')
-@section('header', 'Product Detail')
-@section('header-description', 'Details of the selected product')
+@section('title', 'Detail Produk')
+@section('header', 'Detail Produk')
+@section('header-description', 'Detail produk yang dipilih')
 
 @section('content')
-<!-- Product section -->
+<!-- Bagian produk -->
 <section class="py-5">
     <div class="container px-4 px-lg-5 my-5">
         <div class="row gx-4 gx-lg-5 align-items-center">
@@ -26,22 +26,22 @@
                 </div>
                 <p class="lead mb-4">{{ $product->description }}</p>
                 <div class="mt-3">
-                    <p class="small mb-1 text-muted">Available Stock: {{ $product->stock }}</p>
-                    <p class="small mb-1">Promotions:
+                    <p class="small mb-1 text-muted">Stok Tersedia: {{ $product->stock }}</p>
+                    <p class="small mb-1">Promosi:
                         @forelse($product->promos as $promo)
                         {{ $promo->name }} - <span class="badge bg-dark">{{ $promo->discount }}% off</span>
                         @empty
-                        No promotions currently.
+                        Tidak ada promosi saat ini.
                         @endforelse
                     </p>
-                    <p class="small mb-1">Sold by: {{ $product->seller->name }}</p>
+                    <p class="small mb-1">Dijual oleh: {{ $product->seller->name }}</p>
                 </div>
 
                 <form action="{{ route('buyer.order', ['product_id' => $product->id]) }}" method="POST">
                     @csrf
                     <div class="row align-items-center mt-4">
                         <div class="col-md-4 col-12 mb-3">
-                            <label for="quantity" class="form-label">Quantity:</label>
+                            <label for="quantity" class="form-label">Kuantitas:</label>
                             <div class="input-group">
                                 <button class="btn btn-outline-dark" type="button"
                                     onclick="decreaseQuantity()">-</button>
@@ -52,7 +52,7 @@
                             </div>
                         </div>
                         <div class="col-md-4 col-12 mb-3">
-                            <label for="totalPrice" class="form-label">Total Payment:</label>
+                            <label for="totalPrice" class="form-label">Total Pembayaran:</label>
                             <div class="input-group">
                                 <input type="text" class="form-control" id="totalPayment" name="totalPrice"
                                     style="max-width: 10rem" readonly
@@ -61,7 +61,7 @@
                         </div>
                         <div class="col-md-4 col-12 ">
                             <button class="btn btn-outline-dark mt-3" type="submit"><i class="bi-cart-fill me-1"></i>
-                                Booking Now</button>
+                                Pesan Sekarang</button>
                         </div>
                     </div>
                 </form>
@@ -71,25 +71,25 @@
     </div>
 </section>
 
-<!-- Related items section -->
+<!-- Bagian produk terkait -->
 <section class="py-5 bg-light">
     <div class="container px-4 px-lg-5 mt-5">
-        <h2 class="fw-bolder mb-4 text-center">Related products</h2>
+        <h2 class="fw-bolder mb-4 text-center">Produk Terkait</h2>
         <div class="row gx-4 gx-lg-5 row-cols-1 row-cols-md-2 row-cols-xl-4 justify-content-center">
             @foreach($relatedProducts as $relatedProduct)
             <div class="col mb-4">
                 <div class="card h-100 position-relative">
-                    <!-- Discount badge -->
+                    <!-- Badge diskon -->
                     @if($relatedProduct->isOnSale() && $relatedProduct->promos->isNotEmpty())
                     <div class="discount-badge position-absolute top-0 end-0 mt-2">
-                        <span class="badge bg-dark text-white">Sale -{{ $relatedProduct->promos->first()->discount
+                        <span class="badge bg-dark text-white">Diskon -{{ $relatedProduct->promos->first()->discount
                             }}%</span>
                     </div>
                     @endif
-                    <!-- Product image -->
+                    <!-- Gambar produk -->
                     <img class="card-img-top" src="{{ asset($relatedProduct->image) }}"
                         alt="{{ $relatedProduct->name }}" />
-                    <!-- Product details -->
+                    <!-- Detail produk -->
                     <div class="card-body p-4">
                         <div class="text-center">
                             <h5 class="fw-bolder">{{ $relatedProduct->name }}</h5>
@@ -105,15 +105,15 @@
                             @endif
                         </div>
                     </div>
-                    <!-- Product actions -->
+                    <!-- Aksi produk -->
                     <div class="card-footer p-4 border-top-0 bg-transparent">
                         <div class="d-flex justify-content-between align-items-center">
                             <div>
-                                <p class="mb-0 text-muted">Seller: {{ $relatedProduct->seller->name }}</p>
+                                <p class="mb-0 text-muted">Penjual: {{ $relatedProduct->seller->name }}</p>
                             </div>
                             <a class="btn btn-outline-dark"
-                                href="{{ route('buyer.product.detail', ['id' => $relatedProduct->id]) }}">View
-                                details</a>
+                                href="{{ route('buyer.product.detail', ['id' => $relatedProduct->id]) }}">Lihat
+                                detail</a>
                         </div>
                     </div>
                 </div>
@@ -142,7 +142,7 @@
         var quantity = document.getElementById('quantity');
         quantity.addEventListener('input', updateTotalPrice);
 
-        // Inisialisasi total pembayaran dengan harga awal
+       
         updateTotalPrice();
     });
 
@@ -155,7 +155,7 @@
 
         var totalPrice = quantity * productPrice;
 
-        // Pastikan elemen dengan ID 'totalPayment' ada di HTML
+       
         var totalPaymentElement = document.getElementById('totalPayment');
         if (totalPaymentElement) {
             totalPaymentElement.value = formatCurrency(totalPrice);

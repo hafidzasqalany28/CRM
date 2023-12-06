@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>@yield('title', 'Shop Homepage - Start Bootstrap Template')</title>
+    <title>@yield('title', 'Halaman Beranda Toko - Template Start Bootstrap')</title>
     {{-- Font Awesome --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <!-- Favicon-->
@@ -41,15 +41,15 @@
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
                         <a class="nav-link {{ Request::is('buyer/home') ? 'active' : '' }}"
-                            href="{{ route('buyer.dashboard') }}">Home</a>
+                            href="{{ route('buyer.dashboard') }}">Beranda</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {{ Request::is('buyer/about') ? 'active' : '' }}"
-                            href="{{ route('buyer.about') }}">About</a>
+                            href="{{ route('buyer.about') }}">Tentang</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {{ Request::is('buyer/order-history') ? 'active' : '' }}"
-                            href="{{ route('buyer.order-history') }}">History Pembelian</a>
+                            href="{{ route('buyer.order-history') }}">Riwayat Pembelian</a>
                     </li>
                 </ul>
                 <div class="d-flex">
@@ -60,17 +60,17 @@
                             {{ Auth::user()->name }}
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="userDropdown">
-                            <li><a class="dropdown-item" href="{{ route('buyer.profile') }}">Profile</a></li>
+                            <li><a class="dropdown-item" href="{{ route('buyer.profile') }}">Profil</a></li>
                             <li>
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
-                                    <button type="submit" class="dropdown-item logout">Logout</button>
+                                    <button type="submit" class="dropdown-item logout">Keluar</button>
                                 </form>
                             </li>
                         </ul>
                     </div>
                     @else
-                    <a class="btn btn-outline-dark" href="{{ route('login') }}">Login</a>
+                    <a class="btn btn-outline-dark" href="{{ route('login') }}">Masuk</a>
                     @endauth
                 </div>
             </div>
@@ -81,9 +81,9 @@
     <header class="bg-dark py-5 mt-5">
         <div class="container px-4 px-lg-5 my-5">
             <div class="text-center text-white">
-                <h1 class="display-4 fw-bolder">@yield('header', 'Shop in style')</h1>
-                <p class="lead fw-normal text-white-50 mb-0">@yield('header-description', 'With this shop homepage
-                    template')</p>
+                <h1 class="display-4 fw-bolder">@yield('header', 'Beli dengan Gaya')</h1>
+                <p class="lead fw-normal text-white-50 mb-0">@yield('header-description', 'Dengan template beranda
+                    toko ini')</p>
             </div>
         </div>
     </header>
@@ -99,11 +99,10 @@
         <div class="container py-5">
             <div class="row g-5">
                 <div class="col-lg-3 col-md-6">
-                    <h1 class="fw-bold text-light mb-4">Sweet<span class="text-secondary">Potato</span></h1>
-                    <p>Your one-stop destination for the finest organic sweet potatoes. We are passionate about
-                        providing
-                        high-quality, sustainably grown sweet potatoes from KAMPUNG BERSEHATI, DISTRIK TANAH MIRING,
-                        MERAUKE.</p>
+                    <h1 class="fw-bold text-light mb-4">SweeTrade<span class="text-secondary">Hub</span></h1>
+                    <p>Tempat tujuan Anda untuk Ubi Jalar organik terbaik. Kami berkomitmen untuk menyediakan
+                        Ubi Jalar berkualitas tinggi, ditanam secara berkelanjutan dari KAMPUNG BERSEHATI, DISTRIK
+                        TANAH MIRING, MERAUKE.</p>
                     <div class="d-flex pt-2">
                         <a class="btn btn-square btn-outline-light rounded-circle me-1" href="#"><i
                                 class="fab fa-twitter"></i></a>
@@ -116,27 +115,28 @@
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
-                    <h4 class="text-light mb-4">Address</h4>
-                    <p><i class="fa fa-map-marker-alt me-3"></i>123 Street, New York, USA</p>
+                    <h4 class="text-light mb-4">Alamat</h4>
+                    <p><i class="fa fa-map-marker-alt me-3"></i>123 Jalan, Tanah Miring, Merauke</p>
                     <p><i class="fa fa-phone-alt me-3"></i>+012 345 67890</p>
                     <p><i class="fa fa-envelope me-3"></i>info@example.com</p>
                 </div>
                 <div class="col-lg-3 col-md-6">
-                    <h4 class="text-light mb-4">Quick Links</h4>
-                    <a class="btn btn-link text-light" href="#">About Us</a>
-                    <a class="btn btn-link text-light" href="#">Contact Us</a>
-                    <a class="btn btn-link text-light" href="#">Our Services</a>
-                    <a class="btn btn-link text-light" href="#">Terms &amp; Condition</a>
-                    <a class="btn btn-link text-light" href="#">Support</a>
+                    <h4 class="text-light mb-4">Tautan Cepat</h4>
+                    <a class="btn btn-link text-light" href="#">Tentang Kami</a>
+                    <a class="btn btn-link text-light" href="#">Hubungi Kami</a>
+                    <a class="btn btn-link text-light" href="#">Layanan Kami</a>
+                    <a class="btn btn-link text-light" href="#">Syarat &amp; Ketentuan</a>
+                    <a class="btn btn-link text-light" href="#">Dukungan</a>
                 </div>
                 <div class="col-lg-3 col-md-6">
-                    <h4 class="text-light mb-4">Newsletter</h4>
-                    <p>Stay updated with our latest sweet potato news and offers. Sign up for our newsletter!</p>
+                    <h4 class="text-light mb-4">Berita Terbaru</h4>
+                    <p>Dapatkan informasi terkini mengenai berita dan penawaran Ubi Jalar terbaru kami. Jangan lewatkan!
+                        Daftarkan email Anda untuk mendapatkan newsletter kami.</p>
                     <div class="position-relative mx-auto" style="max-width: 400px;">
                         <input class="form-control bg-transparent w-100 py-3 ps-4 pe-5" type="text"
-                            placeholder="Your email">
-                        <button type="button" class="btn btn-success py-2 position-absolute top-0 end-0 mt-2 me-2">Sign
-                            Up</button>
+                            placeholder="Email Anda">
+                        <button type="button"
+                            class="btn btn-success py-2 position-absolute top-0 end-0 mt-2 me-2">Daftar</button>
                     </div>
                 </div>
             </div>
@@ -145,16 +145,12 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                        © <a href="#" class="text-light">Sweet Potato Shop</a>, All Right Reserved.
+                        © <a href="#" class="text-light">Toko Ubi Jalar</a>, Seluruh Hak Cipta Dilindungi.
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-
-
-
 
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>

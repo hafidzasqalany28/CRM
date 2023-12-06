@@ -1,26 +1,26 @@
 @extends('layouts.master')
 
-@section('title', 'Sweet Potato Orders')
-@section('header', 'Order History')
-@section('header-description', 'Explore your history of sweet potato orders')
+@section('title', 'Pesanan Ubi Jalar')
+@section('header', 'Riwayat Pesanan')
+@section('header-description', 'Jelajahi riwayat pesanan ubi jalar Anda')
 
 @section('content')
 <section class="py-5">
     <div class="container">
-        <h2 class="fw-bolder mb-4">Your Order History</h2>
+        <h2 class="fw-bolder mb-4">Riwayat Pesanan Anda</h2>
         @if($orders->isEmpty())
-        <p class="text-muted">You have no order history.</p>
+        <p class="text-muted">Anda tidak memiliki riwayat pesanan.</p>
         @else
         <div class="table-responsive">
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th class="border-0">Order ID</th>
-                        <th class="border-0">Product</th>
-                        <th class="border-0">Quantity</th>
-                        <th class="border-0">Total Price</th>
+                        <th class="border-0">ID Pesanan</th>
+                        <th class="border-0">Produk</th>
+                        <th class="border-0">Kuantitas</th>
+                        <th class="border-0">Total Harga</th>
                         <th class="border-0">Status</th>
-                        <th class="border-0">Order Date</th>
+                        <th class="border-0">Tanggal Pesan</th>
                     </tr>
                 </thead>
                 <tbody>
