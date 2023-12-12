@@ -49,7 +49,12 @@
                                 <tr>
                                     <td>{{ $product->name }}</td>
                                     <td>Rp {{ number_format($product->price, 0, ',', '.') }}</td>
-                                    <td>{{ $product->stock - $product->orders->sum('quantity') }}</td>
+                                    <td>
+                                        @php
+                                        $availableStock = max($product->stock - $product->orders->sum('quantity'), 0);
+                                        @endphp
+                                        {{ $availableStock }}
+                                    </td>
                                     <td>
                                         <a href="{{ route('seller.input-product.index') }}" class="btn btn-primary">
                                             <i class="fas fa-search"></i> Lihat Detail
@@ -137,7 +142,7 @@
             var totalRevenue = product.orders.reduce(function (total, order) {
                 return total + order.quantity * product.price;
             }, 0);
-            var stockAvailable = product.stock - totalSold;
+            var stockAvailable = Math.max(product.stock - totalSold, 0); // Ensure non-negative stock
             return {
                 name: product.name,
                 price: product.price,
@@ -186,7 +191,7 @@
             },
             options: {
                 responsive: true,
-        maintainAspectRatio: false,
+                maintainAspectRatio: false,
                 scales: {
                     y: {
                         beginAtZero: true,

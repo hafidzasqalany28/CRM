@@ -36,7 +36,7 @@
                             <td>{{ $product->name }}</td>
                             <td>{{ $product->description }}</td>
                             <td>Rp {{ number_format($product->price, 0) }}</td>
-                            <td>{{ $product->stock - $product->orders->sum('quantity') }}</td>
+                            <td>{{ max(0, $product->stock - $product->orders->sum('quantity')) }}</td>
                             <td>
                                 <img src="{{ asset($product->image) }}" alt="Product Image" style="max-width: 100px;">
                             </td>

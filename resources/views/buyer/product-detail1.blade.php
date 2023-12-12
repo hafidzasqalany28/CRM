@@ -78,13 +78,11 @@
         <div class="row gx-4 gx-lg-5 row-cols-1 row-cols-md-2 row-cols-xl-4 justify-content-center">
             @foreach($relatedProducts as $relatedProduct)
             <div class="col mb-4">
-                <div class="card h-100 position-relative">
+                <div class="card h-100 position-relative border-0 shadow animate__animated animate__fadeIn">
                     <!-- Badge diskon -->
                     @if($relatedProduct->isOnSale() && $relatedProduct->promos->isNotEmpty())
-                    <div class="discount-badge position-absolute top-0 end-0 mt-2">
-                        <span class="badge bg-dark text-white">Diskon -{{ $relatedProduct->promos->first()->discount
-                            }}%</span>
-                    </div>
+                    <div class="badge bg-danger position-absolute top-0 end-0 mt-2">Diskon -{{
+                        $relatedProduct->promos->first()->discount }}%</div>
                     @endif
                     <!-- Gambar produk -->
                     <img class="card-img-top" src="{{ asset($relatedProduct->image) }}"
@@ -97,8 +95,8 @@
                             @if($relatedProduct->isOnSale())
                             <span class="text-muted text-decoration-line-through">Rp {{
                                 number_format($relatedProduct->originalPrice(), 0, ',', '.') }}</span>
-                            <span class="fw-bold">Rp {{ number_format($relatedProduct->currentPrice(), 0, ',', '.')
-                                }}</span>
+                            <span class="fw-bold text-danger ms-2">Rp {{ number_format($relatedProduct->currentPrice(),
+                                0, ',', '.') }}</span>
                             @else
                             <span class="fw-bold">Rp {{ number_format($relatedProduct->originalPrice(), 0, ',', '.')
                                 }}</span>
@@ -122,6 +120,8 @@
         </div>
     </div>
 </section>
+
+
 
 <script>
     function increaseQuantity() {

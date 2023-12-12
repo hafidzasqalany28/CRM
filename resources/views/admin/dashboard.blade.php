@@ -110,9 +110,9 @@
                             <tr>
                                 <td>{{ $product->name }}</td>
                                 <td class="text-nowrap">Rp {{ number_format($product->price, 0, ',', '.') }}</td>
-                                <td>{{ $product->stock - $product->orders->sum('quantity') }}</td>
+                                <td>{{ max(0, $product->stock - $product->orders->sum('quantity')) }}</td>
                                 <td>{{ $product->seller->name }}</td>
-                                <td class=>{{ $product->created_at }}</td>
+                                <td>{{ $product->created_at }}</td>
                             </tr>
                             @endforeach
                         </tbody>
@@ -120,6 +120,7 @@
                 </div>
             </div>
         </div>
+
     </div>
 
 </div>
@@ -164,6 +165,8 @@
                 ],
             },
             options: {
+                responsive: true,
+            maintainAspectRatio: false,
                 animation: {
                     responsive: true, // Menjadikan grafik responsif
             maintainAspectRatio: false, // Menyesuaikan rasio aspek
@@ -186,29 +189,30 @@
                     },
                 },
                 tooltips: {
-                    callbacks: {
-                        label: function (context) {
-                            var label = context.dataset.label || '';
-                            if (label) {
-                                label += ': ';
-                            }
-                            label += context.parsed.y.toLocaleString('en-US', {
-                                style: 'currency',
-                                currency: 'USD',
-                            });
+    callbacks: {
+        label: function (context) {
+            var label = context.dataset.label || '';
+            if (label) {
+                label += ': ';
+            }
+            label += context.parsed.y.toLocaleString('en-US', {
+                style: 'currency',
+                currency: 'USD',
+            });
 
-                            if (context.datasetIndex === 0) {
-                                label += ' (' + sellerData[context.label].total_sold + ' terjual)';
-                            } else if (context.datasetIndex === 1) {
-                                label += ' (' + context.parsed.y + ' produk)';
-                            } else if (context.datasetIndex === 2) {
-                                label += ' (' + context.parsed.y + ' produk)';
-                            }
+            if (context.datasetIndex === 0) {
+                label += ' (' + context.parsed.y + ' terjual)';
+            } else if (context.datasetIndex === 1) {
+                label += ' (' + context.parsed.y + ' stok)';
+            } else if (context.datasetIndex === 2) {
+                label += ' (' + context.parsed.y + ' produk)';
+            }
 
-                            return label;
-                        },
-                    },
-                },
+            return label;
+        },
+    },
+},
+
             },
         });
 </script>

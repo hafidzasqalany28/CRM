@@ -47,7 +47,10 @@ class AdminController extends Controller
                 'stocks' => $seller->products->sum(function ($product) {
                     // Perbarui stok berdasarkan pesanan
                     $totalOrders = $product->orders->sum('quantity');
-                    return $product->stock - $totalOrders;
+                    $currentStock = $product->stock - $totalOrders;
+
+                    // Make sure the stock is not negative
+                    return max(0, $currentStock);
                 }),
             ];
         }
