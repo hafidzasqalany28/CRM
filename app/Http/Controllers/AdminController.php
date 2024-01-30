@@ -36,24 +36,24 @@ class AdminController extends Controller
             ->with('products.orders')
             ->get();
 
-        $products = [];
+       $products = [];
 
-        foreach ($sellerData as $seller) {
-            $products[$seller->name] = [
-                'product_names' => $seller->products->pluck('name'),
-                'total_prices' => $seller->products->sum(function ($product) {
-                    return $product->orders->sum('total_price');
-                }),
-                'stocks' => $seller->products->sum(function ($product) {
-                    // Perbarui stok berdasarkan pesanan
-                    $totalOrders = $product->orders->sum('quantity');
-                    $currentStock = $product->stock - $totalOrders;
+    foreach ($sellerData as $seller) {
+        $products[$seller->name] = [
+            'product_names' => $seller->products->pluck('name'),
+            'total_prices' => $seller->products->sum(function ($product) {
+                return $product->orders->where('status', 'completed')->sum('total_price');
+            }),
+            'stocks' => $seller->products->sum(function ($product) {
+                // Perbarui stok berdasarkan pesanan yang sudah "completed"
+                $totalOrders = $product->orders->where('status', 'completed')->sum('quantity');
+                $currentStock = $product->stock;
 
-                    // Make sure the stock is not negative
-                    return max(0, $currentStock);
-                }),
-            ];
-        }
+                // Pastikan stok tidak negatif
+                return max(0, $currentStock);
+            }),
+        ];
+    }
 
         return view('admin.dashboard', compact(
             'activeProductCount',

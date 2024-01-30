@@ -29,7 +29,7 @@
                     <p class="small mb-1 text-muted">Stok Tersedia: {{ $product->stock }}</p>
                     <p class="small mb-1">Promosi:
                         @forelse($product->promos as $promo)
-                        {{ $promo->name }} - <span class="badge bg-dark">{{ $promo->discount }}% off</span>
+                        {{ $promo->name }} - <span class="badge bg-danger">{{ $promo->discount }}% off</span>
                         @empty
                         Tidak ada promosi saat ini.
                         @endforelse

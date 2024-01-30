@@ -27,10 +27,10 @@
                 <tbody>
                     @foreach ($products as $product)
                     <tr>
-                        <td>{{ $product->id }}</td>
-                        <td>{{ $product->name }}</td>
-                        <td>{{ max(0, $product->stock - $product->orders->sum('quantity')) }}</td>
-                        <td>{{ $product->seller->name }}</td>
+                       <td>{{ $product->id }}</td>
+        <td>{{ $product->name }}</td>
+        <td>{{ $product->current_stock }}</td>
+        <td>{{ $product->seller->name }}</td>
                         <td>
                             <a href="{{ route('admin.products.show', $product->id) }}" class="btn btn-primary">Lihat</a>
                             <a href="{{ route('admin.products.edit', $product->id) }}" class="btn btn-warning">Edit</a>

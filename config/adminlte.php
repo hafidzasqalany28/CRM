@@ -334,6 +334,12 @@ return [
             'can' => 'seller',
         ],
         [
+            'text' => 'Manage Order',
+            'url' => 'seller/manage-order',
+            'icon' => 'fas fa-fw fa-clipboard-list',
+            'can' => 'seller',
+        ],
+        [
             'text' => 'Product Management',
             'url' => 'seller/input-product',
             'icon' => 'fas fa-fw fa-box',

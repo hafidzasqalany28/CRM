@@ -14,6 +14,7 @@ use App\Http\Controllers\AdminPromoController;
 use App\Http\Controllers\SellerPromoController;
 use App\Http\Controllers\AdminProductController;
 use App\Http\Controllers\SellerProductController;
+use App\Http\Controllers\SellerOrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,7 +29,7 @@ use App\Http\Controllers\SellerProductController;
 
 // Public routes
 Route::get('/', function () {
-    return view('adminlte::auth.login');
+    return view('auth.login');
 });
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
@@ -53,6 +54,8 @@ Route::middleware(['auth', 'seller'])->group(function () {
         Route::get('/dashboard', [SellerController::class, 'index'])->name('dashboard');
         Route::resource('/input-product', SellerProductController::class)->except('show');
         Route::resource('/input-promo', SellerPromoController::class)->except('show');
+         Route::get('/manage-order', [SellerOrderController::class, 'index'])->name('manage-order.index');
+        Route::put('/manage-order/{order}/complete', [SellerOrderController::class, 'complete'])->name('manage-order.complete');
     });
 });
 

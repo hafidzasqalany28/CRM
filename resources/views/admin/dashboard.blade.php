@@ -106,15 +106,21 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($latestProducts as $product)
-                            <tr>
-                                <td>{{ $product->name }}</td>
-                                <td class="text-nowrap">Rp {{ number_format($product->price, 0, ',', '.') }}</td>
-                                <td>{{ max(0, $product->stock - $product->orders->sum('quantity')) }}</td>
-                                <td>{{ $product->seller->name }}</td>
-                                <td>{{ $product->created_at }}</td>
-                            </tr>
-                            @endforeach
+                           @foreach ($latestProducts as $product)
+    <tr>
+        <td>{{ $product->name }}</td>
+        <td class="text-nowrap">Rp {{ number_format($product->price, 0, ',', '.') }}</td>
+        <td>
+            @php
+                $availableStock = max(0, $product->stock);
+            @endphp
+            {{ $availableStock }}
+        </td>
+        <td>{{ $product->seller->name }}</td>
+        <td>{{ $product->created_at }}</td>
+    </tr>
+@endforeach
+
                         </tbody>
                     </table>
                 </div>

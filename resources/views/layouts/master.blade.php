@@ -28,7 +28,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
         <div class="container px-4 px-lg-5">
             <a class="navbar-brand" href="{{ route('buyer.dashboard') }}">
-                <img src="{{ asset('assets/logo.PNG') }}" alt="Your Logo" width="auto" height="100">
+                <img src="{{ asset('assets/logo.PNG') }}" alt="Your Logo" width="auto" height="50">
                 SweeTrade Hub
             </a>
 

@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Pesanan Ubi Jalar')
+@section('title', 'Riwayat Pesanan')
 @section('header', 'Riwayat Pesanan')
 @section('header-description', 'Jelajahi riwayat pesanan ubi jalar Anda')
 

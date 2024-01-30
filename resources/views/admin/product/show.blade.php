@@ -21,7 +21,7 @@
                 </div>
                 <div class="mb-4">
                     <p><strong>Harga:</strong> Rp {{ number_format($product->price, 0, ',', '.') }}</p>
-                    <p><strong>Stok Saat Ini:</strong> {{ $product->stock - $product->orders->sum('quantity') }}</p>
+                        <p><strong>Stok Saat Ini:</strong> {{ $product->current_stock }}</p>
                     <p><strong>Penjual:</strong> {{ $product->seller->name }}</p>
                 </div>
                 <p><strong>Tanggal Pembuatan:</strong> {{ optional($product->created_at)->format('d M Y H:i') }}</p>

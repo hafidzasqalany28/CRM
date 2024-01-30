@@ -10,12 +10,13 @@ class AdminProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+   public function index()
     {
-        $products = Product::all();
+        $products = Product::with('orders')->get();
+
         $products->each(function ($product) {
-            $totalOrders = $product->orders->sum('quantity');
-            $product->current_stock = $product->current_stock - $totalOrders;
+            $completedOrders = $product->orders->where('status', 'completed')->sum('quantity');
+            $product->current_stock = max(0, $product->stock - $completedOrders);
         });
 
         return view('admin.product.index', compact('products'));
@@ -56,10 +57,19 @@ class AdminProductController extends Controller
      * Display the specified resource.
      */
     public function show(string $id)
-    {
-        $product = Product::find($id);
-        return view('admin.product.show', compact('product'));
+{
+    $product = Product::with('orders')->find($id);
+
+    if (!$product) {
+        abort(404); // Product not found
     }
+
+    $completedOrders = $product->orders->where('status', 'completed')->sum('quantity');
+    $product->current_stock = max(0, $product->stock - $completedOrders);
+
+    return view('admin.product.show', compact('product'));
+}
+
 
     /**
      * Show the form for editing the specified resource.

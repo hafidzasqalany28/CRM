@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Temukan Toko Ubi Jalar Kami')
+@section('title', 'Home')
 @section('header', 'Toko Ubi Jalar')
 @section('header-description', 'Jelajahi toko ubi jalar kami dan temukan esensi pertanian berkelanjutan serta cita rasa
 yang kaya.')

@@ -70,12 +70,12 @@ class BuyerController extends Controller
         $order->product_id = $product->id;
         $order->quantity = $quantity;
         $order->total_price = $totalPrice;
-        $order->status = 'completed';
+        $order->status = 'pending';
         $order->save();
 
-        // Update stok produk
-        $product->stock -= $quantity;
-        $product->save();
+        // // Update stok produk
+        // $product->stock -= $quantity;
+        // $product->save();
 
         return redirect()->route('buyer.dashboard')->with('success', 'Order successful.');
     }

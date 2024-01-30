@@ -50,11 +50,13 @@
                                     <td>{{ $product->name }}</td>
                                     <td>Rp {{ number_format($product->price, 0, ',', '.') }}</td>
                                     <td>
-                                        @php
-                                        $availableStock = max($product->stock - $product->orders->sum('quantity'), 0);
-                                        @endphp
-                                        {{ $availableStock }}
-                                    </td>
+    @php
+    $completedOrderQuantity = $product->orders->where('status', 'completed')->sum('quantity');
+    $availableStock = max($product->stock, 0);
+    @endphp
+    {{ $availableStock }}
+</td>
+
                                     <td>
                                         <a href="{{ route('seller.input-product.index') }}" class="btn btn-primary">
                                             <i class="fas fa-search"></i> Lihat Detail
@@ -97,34 +99,38 @@
         </div>
 
         <div class="col-lg-6 d-flex">
-            <div class="card card-warning flex-fill">
-                <div class="card-header">
-                    <h3 class="card-title text-white">Laporan Penjualan dan Pendapatan</h3>
-                </div>
-                <div class="card-body">
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>Nama Produk</th>
-                                <th>Total Terjual</th>
-                                <th>Total Pendapatan</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($products as $product)
-                            <tr>
-                                <td>{{ $product->name }}</td>
-                                <td>{{ $product->orders->sum('quantity') }}</td>
-                                <td>Rp {{ number_format($product->orders->sum(function($order) {
-                                    return $order->quantity * $order->product->price;
-                                    }), 0, ',', '.') }}</td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+    <div class="card card-warning flex-fill">
+        <div class="card-header">
+            <h3 class="card-title text-white">Laporan Penjualan dan Pendapatan</h3>
         </div>
+        <div class="card-body">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Nama Produk</th>
+                        <th>Total Terjual</th>
+                        <th>Total Pendapatan</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($products as $product)
+                    <tr>
+                        <td>{{ $product->name }}</td>
+                        <td>
+                            {{ $product->orders->where('status', 'completed')->sum('quantity') }}
+                        </td>
+                        <td>
+                            Rp {{ number_format($product->orders->where('status', 'completed')->sum(function($order) {
+                                return $order->quantity * $order->product->price;
+                            }), 0, ',', '.') }}
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
     </div>
 </div>
 @stop
@@ -136,13 +142,20 @@
         var productData = {!! json_encode($products) !!};
 
         var salesData = productData.map(function (product) {
-            var totalSold = product.orders.reduce(function (total, order) {
+            var completedOrders = product.orders.filter(function (order) {
+                return order.status === 'completed';
+            });
+
+            var totalSold = completedOrders.reduce(function (total, order) {
                 return total + order.quantity;
             }, 0);
-            var totalRevenue = product.orders.reduce(function (total, order) {
+
+            var totalRevenue = completedOrders.reduce(function (total, order) {
                 return total + order.quantity * product.price;
             }, 0);
-            var stockAvailable = Math.max(product.stock - totalSold, 0); // Ensure non-negative stock
+
+            var stockAvailable = Math.max(product.stock, 0); // Ensure non-negative stock
+
             return {
                 name: product.name,
                 price: product.price,
